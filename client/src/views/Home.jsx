@@ -9,7 +9,7 @@ class Home extends Component {
         <Link to='/dare/all'> Dares</Link>
         <Link to='/profile'> Profile</Link>
         <Link to='/checkout'> Checkout</Link>
-        <Link to='/checkout/confirmation'> Checkout Conf</Link>
+        <Link to='dare/create/'> Create Dare</Link>
       </div>
     );
   }

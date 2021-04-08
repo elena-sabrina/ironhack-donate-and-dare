@@ -2,14 +2,16 @@
 
 const mongoose = require('mongoose');
 
+//mongoose.Schema.Types.ObjectId
+
 const dareschema = new mongoose.Schema({
   template: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
     ref: 'Template'
   },
   donor: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
     ref: 'Donor'
   },
