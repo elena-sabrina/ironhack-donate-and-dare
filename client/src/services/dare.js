@@ -16,8 +16,10 @@ export const loadTemplate = async (id) => {
   return response.data.template;
 };
 
-export const createDare = async (data) => {
+export const createDare = async (id, data) => {
   console.log("services createDare running");
-  // const response = await api.post(`/dare/create/${id}`, data);
-  // return response.data.template;
+  const response = await api.post(`/dare/create/${id}`, data);
+  return response.data.dare;
 };
+
+

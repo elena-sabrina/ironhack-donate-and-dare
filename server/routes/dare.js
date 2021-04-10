@@ -33,6 +33,35 @@ router.get('/create/:id', async (req, res, next) => {
   }
 });
 
+router.post('/create/:id', async (req, res, next) => {
+  try {
+    const template = await Template.findById(req.params.id);
+    console.log('dare/create/:id passes the template:');
+    console.log(template);
+    const { daredname, daredemail, price } = req.body;
+    console.log('req.body passes:');
+    console.log(req.body);
+    const donor = req.donor._id;
+    console.log('req.donor._id passes the donor:');
+    console.log(donor);
+    const dare = await Dare.create({
+      template,
+      donor,
+      dared: {
+        name: daredname,
+        email: daredemail
+      },
+      price
+    });
+    res.json({ dare });
+    console.log({ dare });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 //| GET | /dare/create/:id | Displays single dare | ❌ |
 //| POST | /dare/create/:id | Allow donors to create a dare | ❌ |
 

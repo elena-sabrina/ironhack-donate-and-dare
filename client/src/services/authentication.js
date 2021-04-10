@@ -22,8 +22,7 @@ export const signUp = async (data) => {
 export const verify = async () => {
   const response = await api.get("/authentication/verify");
   const body = response.data;
-  console.log("verify:");
-  console.log(body);
+
   const donor = body.donor;
   return donor;
 };

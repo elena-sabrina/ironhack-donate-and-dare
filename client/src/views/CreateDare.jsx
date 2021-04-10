@@ -4,47 +4,42 @@ import { createDare, loadTemplate } from "./../services/dare.js";
 export class CreateDare extends Component {
   state = {
     template: null,
-    donor: "",
-    dared: "",
+    daredname: "",
+    daredemail: "",
     price: ""
   };
 
   async componentDidMount() {
     const template = await loadTemplate(this.props.match.params.id);
     this.setState({ template });
-    console.log("component did mount");
-    console.log(this.state.template);
   }
 
   handleFormSubmission = async (event) => {
-    console.log("starting handleFormSubmission");
     event.preventDefault();
-    const templatedata = this.state.template;
-    const donordata = this.props.donor;
-    const { template, donor, dared, price } = this.state;
+    const { daredname, daredemail, price } = this.state;
     const data = {
-      template: templatedata,
-      donor: donordata,
-      dared,
+      daredname,
+      daredemail,
       price
     };
-    console.log("data");
-    console.log(data);
+    /*
     const body = new FormData();
-    console.log(body);
     for (let key in data) {
       const value = data[key];
       console.log(value);
       if (value instanceof Array) {
         for (let item of value) {
           body.append(key, item);
+          console.log("body:");
+          console.log(body);
         }
       } else {
         body.append(key, value);
       }
     }
-    const dare = await createDare(this.props.match.params.id);
-    console.log(dare);
+    */
+    const dare = await createDare(this.props.match.params.id, data);
+    this.props.history.push(`/checkout/${dare._id}`);
   };
 
   handleInputChange = (event) => {
@@ -64,13 +59,23 @@ export class CreateDare extends Component {
             <form onSubmit={this.handleFormSubmission}>
               <p>Template: {this.state.template.name}</p>
               <p>Donor: {this.props.donor.name}</p>
-              <label htmlFor='input-dared'>Dared</label>
+              <label htmlFor='input-daredname'>Dared Name</label>
               <input
-                id='input-dared'
-                name='dared'
+                id='input-daredname'
+                name='daredname'
                 type='text'
                 placeholder='Who do you want to dare?'
-                value={this.state.dared}
+                value={this.state.daredname}
+                onChange={this.handleInputChange}
+                required
+              />
+              <label htmlFor='input-daredemail'>Dared Email</label>
+              <input
+                id='input-daredemail'
+                name='daredemail'
+                type='text'
+                placeholder='What is their email?'
+                value={this.state.daredemail}
                 onChange={this.handleInputChange}
                 required
               />

@@ -6,14 +6,18 @@ const mongoose = require('mongoose');
 
 const dareschema = new mongoose.Schema({
   template: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Template'
   },
   donor: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Donor'
+  },
+  price: {
+    type: Number,
+    required: true
   },
   dared: {
     name: {

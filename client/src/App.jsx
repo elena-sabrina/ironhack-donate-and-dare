@@ -47,10 +47,10 @@ class App extends Component {
             )}
             exact
           />
+          <Route path='/checkout/:id' component={Checkout} exact />
 
-          <Route path='/checkout' component={Checkout} exact />
           <Route
-            path='/checkout/confirmation'
+            path='dare/checkout/confirmation'
             component={CheckoutConfirmation}
             exact
           />
