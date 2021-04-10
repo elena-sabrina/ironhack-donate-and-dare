@@ -57,8 +57,8 @@ router.post('/sign-in', (req, res, next) => {
 
 router.get('/verify', (req, res) => {
   console.log('/verify ahtenication.js');
-  console.log(req.body);
-  const donor = req.user || null;
+  console.log(req.donor);
+  const donor = req.donor || null;
   res.json({ donor: donor });
 });
 

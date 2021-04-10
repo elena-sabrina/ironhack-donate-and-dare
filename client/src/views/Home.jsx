@@ -7,7 +7,7 @@ class Home extends Component {
       <div>
         <h1>Home</h1>
         <Link to='/dare/all'> Dares</Link>
-        <Link to='/profile'> Profile</Link>
+
         <Link to='/checkout'> Checkout</Link>
         <Link to='dare/create/'> Create Dare</Link>
       </div>

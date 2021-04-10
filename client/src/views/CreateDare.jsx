@@ -1,16 +1,50 @@
 import React, { Component } from "react";
-import { createDare } from "./../services/dare";
+import { createDare, loadTemplate } from "./../services/dare.js";
 
 export class CreateDare extends Component {
   state = {
-    name: "",
-    template: "",
+    template: null,
     donor: "",
     dared: "",
-    email: "",
-    charity: "",
-    status: "",
-    video: ""
+    price: ""
+  };
+
+  async componentDidMount() {
+    const template = await loadTemplate(this.props.match.params.id);
+    this.setState({ template });
+    console.log("component did mount");
+    console.log(this.state.template);
+  }
+
+  handleFormSubmission = async (event) => {
+    console.log("starting handleFormSubmission");
+    event.preventDefault();
+    const templatedata = this.state.template;
+    const donordata = this.props.donor;
+    const { template, donor, dared, price } = this.state;
+    const data = {
+      template: templatedata,
+      donor: donordata,
+      dared,
+      price
+    };
+    console.log("data");
+    console.log(data);
+    const body = new FormData();
+    console.log(body);
+    for (let key in data) {
+      const value = data[key];
+      console.log(value);
+      if (value instanceof Array) {
+        for (let item of value) {
+          body.append(key, item);
+        }
+      } else {
+        body.append(key, value);
+      }
+    }
+    const dare = await createDare(this.props.match.params.id);
+    console.log(dare);
   };
 
   handleInputChange = (event) => {
@@ -23,39 +57,36 @@ export class CreateDare extends Component {
   render() {
     return (
       <div>
-        <h1>CreateDare</h1>
-        <form>
-          <label htmlFor='input-name'>Name</label>
-          <input
-            id='input-name'
-            name='name'
-            type='text'
-            placeholder='Name'
-            value={this.state.name}
-            onChange={this.handleInputChange}
-            required
-          />
-          <label htmlFor='input-template'>Template</label>
-          <input
-            id='input-template'
-            name='template'
-            type='text'
-            placeholder='Template'
-            value={this.state.template}
-            onChange={this.handleInputChange}
-            required
-          />
-          <label htmlFor='input-donor'>Donor</label>
-          <input
-            id='input-donor'
-            name='donor'
-            type='text'
-            placeholder='donor'
-            value={this.state.donor}
-            onChange={this.handleInputChange}
-            required
-          />
-        </form>
+        {(this.state.template && (
+          <>
+            <h1>Create {this.state.template.name}</h1>
+
+            <form onSubmit={this.handleFormSubmission}>
+              <p>Template: {this.state.template.name}</p>
+              <p>Donor: {this.props.donor.name}</p>
+              <label htmlFor='input-dared'>Dared</label>
+              <input
+                id='input-dared'
+                name='dared'
+                type='text'
+                placeholder='Who do you want to dare?'
+                value={this.state.dared}
+                onChange={this.handleInputChange}
+                required
+              />
+              <input
+                id='input-price'
+                name='price'
+                type='number'
+                placeholder={this.state.template.price}
+                value={this.state.price}
+                onChange={this.handleInputChange}
+                required
+              />
+              <button>Create</button>
+            </form>
+          </>
+        )) || <p>Error no template found</p>}
       </div>
     );
   }

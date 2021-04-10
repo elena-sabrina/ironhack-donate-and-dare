@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "http://localhost:3000",
   withCredentials: true
 });
 
@@ -22,7 +22,7 @@ export const signUp = async (data) => {
 export const verify = async () => {
   const response = await api.get("/authentication/verify");
   const body = response.data;
-  console.log("api.js:");
+  console.log("verify:");
   console.log(body);
   const donor = body.donor;
   return donor;
