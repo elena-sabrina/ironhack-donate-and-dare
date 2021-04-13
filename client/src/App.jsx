@@ -37,6 +37,11 @@ class App extends Component {
       <BrowserRouter>
         <Navbar donor={this.state.donor} />
         <Switch>
+          <Route
+            path='/profile/:id'
+            render={(props) => <Profile {...props} donor={this.state.donor} />}
+            exact
+          />
           <Route path='/dare/all' component={Dares} exact />
           <Route path='/' component={Home} exact />
 
@@ -61,11 +66,7 @@ class App extends Component {
             component={DareConfirmation}
             exact
           />
-          <Route
-            path='/profile'
-            render={(props) => <Profile {...props} donor={this.state.donor} />}
-            exact
-          />
+
           <Route path='/profile/edit' component={EditProfile} exact />
 
           <Route

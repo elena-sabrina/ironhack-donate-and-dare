@@ -22,4 +22,11 @@ export const createDare = async (id, data) => {
   return response.data.dare;
 };
 
-
+export const loadDares = async (id) => {
+  console.log("services loadDare running");
+  console.log(id);
+  const response = await api.get(`/profile/${id}`);
+  console.log("loging response");
+  console.log(response.data.dares);
+  return response.data.dares;
+};

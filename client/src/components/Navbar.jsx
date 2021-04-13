@@ -7,7 +7,9 @@ const Navbar = ({ donor }) => {
       <p>Navbar</p>
       {(donor && (
         <>
-          <Link to='/profile'>View {donor.name}'s Profile</Link> <br />
+          <Link to={`/profile/${donor._id}`}>View {donor.name}'s Profile</Link>{" "}
+          <br />
+          <p>{donor._id}</p>
           <Link to='/sign-out'>SignOut</Link>
         </>
       )) || (
