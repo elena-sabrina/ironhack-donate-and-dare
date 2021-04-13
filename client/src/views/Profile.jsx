@@ -11,8 +11,7 @@ export class Profile extends Component {
   async componentDidMount() {
     console.log("moooouuuuuunting");
     const dares = await loadDares(this.props.match.params.id);
-    console.log("comp mount found daaares");
-    console.log(dares);
+    console.log("comp mount found donor");
     this.setState({ dares });
   }
 

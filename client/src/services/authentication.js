@@ -30,3 +30,5 @@ export const verify = async () => {
 export const signOut = async () => {
   await api.post("/authentication/sign-out");
 };
+
+

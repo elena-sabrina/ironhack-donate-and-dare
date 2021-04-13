@@ -11,7 +11,7 @@ class Dares extends Component {
   async componentDidMount() {
     console.log("mounting dares");
     const templates = await listTemplates();
-    console.log("comp mount fond templates");
+    console.log('comp mount fond templates');
     console.log(templates);
     this.setState({ templates });
   }
