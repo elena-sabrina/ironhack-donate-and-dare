@@ -8,8 +8,8 @@ import Dares from "./views/Dares";
 import CreateDare from "./views/CreateDare";
 import Checkout from "./views/Checkout";
 import CheckoutConfirmation from "./views/CheckoutConfirmation";
-import Dared from "./views/Dared";
-import Donor from "./views/Donor";
+import ActiveDonor from "./views/ActiveDonor";
+import ActiveDared from "./views/ActiveDared";
 import DareConfirmation from "./views/DareConfirmation";
 import Profile from "./views/Profile";
 import EditProfile from "./views/EditProfile";
@@ -59,8 +59,9 @@ class App extends Component {
             component={CheckoutConfirmation}
             exact
           />
-          <Route path='/dare/:id/dared' component={Dared} exact />
-          <Route path='/dare/:id/donor' component={Donor} exact />
+          <Route path='/dare/:id/donor' component={ActiveDonor} exact />
+          <Route path='/dare/:id/dared' component={ActiveDared} exact />
+
           <Route
             path='/dare/id/confirmation'
             component={DareConfirmation}

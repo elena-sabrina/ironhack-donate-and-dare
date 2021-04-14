@@ -90,6 +90,7 @@ export class CreateDare extends Component {
               />
               <button>Create</button>
             </form>
+          
           </>
         )) || <p>Error no template found</p>}
       </div>

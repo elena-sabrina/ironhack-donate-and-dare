@@ -16,30 +16,13 @@ router.get('/', (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, async (req, res, next) => {
   try {
-    console.log('route running');
     const dares = await Dare.find({
-      donor: { _id: '606e5b21ffcba08b8665da85' }
+      donor: { _id: req.session.donorId }
     });
-    const session = req.session;
-    console.log(session);
-    res.json({ dares });
-  } catch (error) {
-    next(error);
-  }
-});
+    const donor = await Donor.findOne({ _id: req.session.donorId });
+    console.log(donor);
 
-
-router.get('/:id', async (req, res, next) => {
-  try {
-    const pet = await Pet.findById(req.params.id).populate('shelter', 'name');
-    let application = null;
-    if (req.user) {
-      application = await Application.findOne({
-        pet: req.params.id,
-        individual: req.user._id
-      });
-    }
-    res.json({ pet, application });
+    res.json({ donor, dares });
   } catch (error) {
     next(error);
   }

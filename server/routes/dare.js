@@ -38,15 +38,22 @@ router.post('/create/:id', async (req, res, next) => {
     const template = await Template.findById(req.params.id);
     console.log('dare/create/:id passes the template:');
     console.log(template);
-    const { daredname, daredemail, price } = req.body;
-    console.log('req.body passes:');
-    console.log(req.body);
+
     const donor = req.donor._id;
     console.log('req.donor._id passes the donor:');
     console.log(donor);
+    const { daredname, daredemail, price } = req.body;
+    console.log('req.body passes:');
+    console.log(req.body);
     const dare = await Dare.create({
-      template,
-      donor,
+      template: {
+        _id: template._id,
+        name: template.name,
+        description: template.description,
+        image: template.image,
+        price: template.price
+      },
+      donor: donor,
       dared: {
         name: daredname,
         email: daredemail
@@ -60,7 +67,31 @@ router.post('/create/:id', async (req, res, next) => {
   }
 });
 
+router.get('/:id/donor', async (req, res, next) => {
+  try {
+    const dare = await Dare.findById(req.params.id).populate(
+      'template',
+      'donor'
+    );
+    console.log('dare/:id/donor passes');
+    console.log(dare);
+    res.json({ dare });
+    
+  } catch (error) {
+    next(error);
+  }
+});
 
+router.get('/:id/dared', async (req, res, next) => {
+  try {
+    const dare = await Dare.findById(req.params.id);
+    console.log('dare/:id/dared passes');
+    console.log(dare);
+    res.json({ dare });
+  } catch (error) {
+    next(error);
+  }
+});
 
 //| GET | /dare/create/:id | Displays single dare | ❌ |
 //| POST | /dare/create/:id | Allow donors to create a dare | ❌ |

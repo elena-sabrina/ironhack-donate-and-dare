@@ -27,6 +27,20 @@ export const loadDares = async (id) => {
   console.log(id);
   const response = await api.get(`/profile/${id}`);
   console.log("loging response");
-  console.log(response.data.dares);
-  return response.data.dares;
+  console.log(response.data);
+  const dares = response.data.dares;
+  const donor = response.data.donor;
+  return { dares, donor };
+};
+
+export const loadDareforDonor = async (id) => {
+  console.log("services loadDareforDonor running");
+  const response = await api.get(`/dare/${id}/donor`);
+  return response.data.dare;
+};
+
+export const loadDareforDared = async (id) => {
+  console.log("services loadDareforDared running");
+  const response = await api.get(`/dare/${id}/dared`);
+  return response.data.dare;
 };
