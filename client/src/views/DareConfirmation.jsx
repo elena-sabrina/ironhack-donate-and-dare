@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export class DareConfirmation extends Component {
     render() {
         return (
-            <div>
+            <div className="Body">
                 <h1>DareConfirmation</h1>
             </div>
         )

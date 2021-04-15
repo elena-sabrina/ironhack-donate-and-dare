@@ -14,12 +14,12 @@ export class Dare extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Body">
         {(this.state.dare && (
           <>
-            <h1>Donor: You have dared x </h1>
+            <h1>Donor: You have dared {this.state.dare.dared.name} </h1>
 
-            <p>{this.state.dare.template._id}</p>
+            <p>{this.state.dare.template.name}</p>
           </>
         )) || <p>Error no dare found</p>}
       </div>

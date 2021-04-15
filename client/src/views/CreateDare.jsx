@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { createDare, loadTemplate } from "./../services/dare.js";
 
+import TemplateItem from "../components/TemplateItem";
+import "./../styles/CreateDare.scss";
+
 export class CreateDare extends Component {
   state = {
     template: null,
@@ -51,46 +54,50 @@ export class CreateDare extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Body CreateDare'>
         {(this.state.template && (
           <>
             <h1>Create {this.state.template.name}</h1>
 
-            <form onSubmit={this.handleFormSubmission}>
-              <p>Template: {this.state.template.name}</p>
-              <p>Donor: {this.props.donor.name}</p>
-              <label htmlFor='input-daredname'>Dared Name</label>
-              <input
-                id='input-daredname'
-                name='daredname'
-                type='text'
-                placeholder='Who do you want to dare?'
-                value={this.state.daredname}
-                onChange={this.handleInputChange}
-                required
-              />
-              <label htmlFor='input-daredemail'>Dared Email</label>
-              <input
-                id='input-daredemail'
-                name='daredemail'
-                type='text'
-                placeholder='What is their email?'
-                value={this.state.daredemail}
-                onChange={this.handleInputChange}
-                required
-              />
-              <input
-                id='input-price'
-                name='price'
-                type='number'
-                placeholder={this.state.template.price}
-                value={this.state.price}
-                onChange={this.handleInputChange}
-                required
-              />
-              <button>Create</button>
-            </form>
-          
+            <TemplateItem
+              template={this.state.template}
+              className='TemplateItem'
+            />
+
+            <main>
+              <form onSubmit={this.handleFormSubmission}>
+                <label htmlFor='input-daredname'>Dared Name</label>
+                <input
+                  id='input-daredname'
+                  name='daredname'
+                  type='text'
+                  placeholder='Who do you want to dare?'
+                  value={this.state.daredname}
+                  onChange={this.handleInputChange}
+                  required
+                />
+                <label htmlFor='input-daredemail'>Dared Email</label>
+                <input
+                  id='input-daredemail'
+                  name='daredemail'
+                  type='text'
+                  placeholder='What is their email?'
+                  value={this.state.daredemail}
+                  onChange={this.handleInputChange}
+                  required
+                />
+                <input
+                  id='input-price'
+                  name='price'
+                  type='number'
+                  placeholder={this.state.template.price}
+                  value={this.state.price}
+                  onChange={this.handleInputChange}
+                  required
+                />
+                <button>Create</button>
+              </form>
+            </main>
           </>
         )) || <p>Error no template found</p>}
       </div>

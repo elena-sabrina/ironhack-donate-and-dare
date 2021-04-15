@@ -16,7 +16,7 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Body">
         <h1>Checkout</h1>
         {(this.state.dare && (
           <>

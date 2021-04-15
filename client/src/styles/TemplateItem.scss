@@ -1,0 +1,27 @@
+@import "variables";
+
+.TemplateItem {
+  background-color: white;
+  img {
+    height: auto;
+    width: 100%;
+  }
+  div {
+    padding: 1em;
+
+    h5 {
+      font-family: $special-font;
+      font-size: 1em;
+      color: $black;
+      letter-spacing: 0.1em;
+    }
+    p {
+      font-size: 0.8em;
+      color: $grey;
+    }
+    .Price {
+      font-size: 1em;
+      color: $black;
+    }
+  }
+}

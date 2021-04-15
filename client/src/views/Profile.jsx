@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { loadDares } from "./../services/dare.js";
+import { Link } from "react-router-dom";
 
 import DareList from "../components/DareList";
 
@@ -13,13 +14,13 @@ export class Profile extends Component {
     console.log("moooouuuuuunting");
     const { dares, donor } = await loadDares(this.props.match.params.id);
     console.log("comp mount found donor & dares");
-    console.log(dares);
+    console.log(donor);
     this.setState({ dares, donor });
   }
 
   render() {
     return (
-      <div>
+      <div className="Body">
         {(this.state.donor && (
           <>
             <h1>Hello</h1>
@@ -28,9 +29,10 @@ export class Profile extends Component {
             <p>Password: *** </p>
 
             <h2>Open dares</h2>
-            <DareList dares={(this.state.dares)} donor ={(this.state.donor)} />
+            <DareList dares={this.state.dares} donor={this.state.donor} />
 
             <h2>Donations</h2>
+            <Link to='/sign-out'>SignOut</Link>
           </>
         )) || <p>Error no donor found</p>}
       </div>

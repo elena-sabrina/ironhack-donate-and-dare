@@ -17,7 +17,7 @@ class Dares extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="Body">
         <h1>Dares</h1>
         <TemplateList templates={this.state.templates} />
       </div>

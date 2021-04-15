@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import { verify } from "./services/authentication.js";
+import "./styles/mains.scss";
 
 import Home from "./views/Home";
 import Dares from "./views/Dares";
@@ -36,6 +36,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Navbar donor={this.state.donor} />
+
         <Switch>
           <Route
             path='/profile/:id'

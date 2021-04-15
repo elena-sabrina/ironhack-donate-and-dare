@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { signUp } from "./../services/authentication.js";
+import { Link } from "react-router-dom";
 
 export class SignUp extends Component {
   state = {
@@ -29,7 +30,7 @@ export class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Body'>
         <h1>SignUp</h1>
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor='name-input'>Name</label>
@@ -61,6 +62,8 @@ export class SignUp extends Component {
           />
           <button>Sign Up</button>
         </form>
+        <p>You have an account already?</p>
+        <Link to='/sign-in'>SignIn</Link>
       </div>
     );
   }

@@ -22,6 +22,8 @@ router.get('/all', async (req, res, next) => {
   }
 });
 
+//| GET | /dare/create/:id | Displays single dare | ❌ |
+
 router.get('/create/:id', async (req, res, next) => {
   try {
     const template = await Template.findById(req.params.id);
@@ -32,6 +34,8 @@ router.get('/create/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+//| POST | /dare/create/:id | Allow donors to create a dare | ❌ |
 
 router.post('/create/:id', async (req, res, next) => {
   try {
@@ -67,24 +71,31 @@ router.post('/create/:id', async (req, res, next) => {
   }
 });
 
+//| GET | /dare/id/donor | Displays dare infos for donor | ❌ |
+
 router.get('/:id/donor', async (req, res, next) => {
   try {
-    const dare = await Dare.findById(req.params.id).populate(
-      'template',
-      'donor'
-    );
+    const dare = await Dare.findById(req.params.id)
+      .populate('template')
+      .populate('donor');
+
     console.log('dare/:id/donor passes');
     console.log(dare);
     res.json({ dare });
-    
   } catch (error) {
     next(error);
   }
 });
 
+//| POST | /dare/id/donor | Allow donor to confirm or decline dare | ❌ |
+
+//| GET | /dare/id/dared | Displays dare infos for dared | ❌ |
 router.get('/:id/dared', async (req, res, next) => {
   try {
-    const dare = await Dare.findById(req.params.id);
+    const dare = await Dare.findById(req.params.id)
+      .populate('template')
+      .populate('donor');
+
     console.log('dare/:id/dared passes');
     console.log(dare);
     res.json({ dare });
@@ -93,12 +104,6 @@ router.get('/:id/dared', async (req, res, next) => {
   }
 });
 
-//| GET | /dare/create/:id | Displays single dare | ❌ |
-//| POST | /dare/create/:id | Allow donors to create a dare | ❌ |
-
-//| GET | /dare/id/dared | Displays dare infos for dared | ❌ |
 //| POST | /dare/id/dared | Allow dared to upload or reject dare | ❌ |
 
-//| GET | /dare/id/donor | Displays dare infos for donor | ❌ |
-//| POST | /dare/id/donor | Allow donor to confirm or decline dare | ❌ |
 module.exports = router;

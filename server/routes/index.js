@@ -19,7 +19,11 @@ router.get('/profile/:id', routeGuard, async (req, res, next) => {
     const dares = await Dare.find({
       donor: { _id: req.session.donorId }
     });
+
+    console.log('profile/:id passes');
+
     const donor = await Donor.findOne({ _id: req.session.donorId });
+    console.log('donor');
     console.log(donor);
 
     res.json({ donor, dares });
