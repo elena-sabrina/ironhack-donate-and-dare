@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { verify } from "./services/authentication.js";
+import { signOut, verify } from "./services/authentication.js";
 import "./styles/mains.scss";
 
 import Home from "./views/Home";
@@ -32,10 +32,15 @@ class App extends Component {
     this.setState({ donor });
   };
 
+  handleSignOut = async () => {
+    await signOut();
+    this.handleUserChange(null);
+  };
+
   render() {
     return (
       <BrowserRouter>
-        <Navbar donor={this.state.donor} />
+        <Navbar donor={this.state.donor} onSignOut={this.handleSignOut} />
 
         <Switch>
           <Route

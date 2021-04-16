@@ -32,7 +32,7 @@ const dareschema = new mongoose.Schema({
   },
   charity: {
     type: String,
-    enum: ['charitya', 'charityb', 'chairtyc']
+    enum: ['bali-children', 'street-paw', 'solemen']
   },
   status: {
     type: String,

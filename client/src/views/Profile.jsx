@@ -3,6 +3,7 @@ import { loadDares } from "./../services/dare.js";
 import { Link } from "react-router-dom";
 
 import DareList from "../components/DareList";
+import "./../styles/Profile.scss";
 
 export class Profile extends Component {
   state = {
@@ -18,21 +19,33 @@ export class Profile extends Component {
     this.setState({ dares, donor });
   }
 
+
   render() {
     return (
-      <div className="Body">
+      <div className='Body Profile'>
         {(this.state.donor && (
           <>
-            <h1>Hello</h1>
-            <h1>Hi {this.state.donor.name}</h1>
-            <p>Email: {this.state.donor.email}</p>
-            <p>Password: *** </p>
+            <h1>Hello {this.state.donor.name}</h1>
+            <section>
+              <h2>My Details</h2>
 
-            <h2>Open dares</h2>
-            <DareList dares={this.state.dares} donor={this.state.donor} />
+              <p>Email: {this.state.donor.email}</p>
+              <p>Password: *** </p>
+              
+              <button>
+                <Link to='/profile-edit'>Edit Details</Link>
+              </button>
+            </section>
+            <section>
+              <h2>Open dares</h2>
+              <div className='profile-darelist'>
+                <DareList dares={this.state.dares} donor={this.state.donor} />
+              </div>
+            </section>
 
-            <h2>Donations</h2>
-            <Link to='/sign-out'>SignOut</Link>
+            <section>
+              <h2>Donations</h2>
+            </section>
           </>
         )) || <p>Error no donor found</p>}
       </div>

@@ -24,7 +24,7 @@ router.get('/all', async (req, res, next) => {
 
 //| GET | /dare/create/:id | Displays single dare | ❌ |
 
-router.get('/create/:id', async (req, res, next) => {
+router.get('/create/:id', routeGuard, async (req, res, next) => {
   try {
     const template = await Template.findById(req.params.id);
     console.log('dare/create/:id passes');
@@ -37,7 +37,7 @@ router.get('/create/:id', async (req, res, next) => {
 
 //| POST | /dare/create/:id | Allow donors to create a dare | ❌ |
 
-router.post('/create/:id', async (req, res, next) => {
+router.post('/create/:id', routeGuard, async (req, res, next) => {
   try {
     const template = await Template.findById(req.params.id);
     console.log('dare/create/:id passes the template:');
@@ -73,7 +73,7 @@ router.post('/create/:id', async (req, res, next) => {
 
 //| GET | /dare/id/donor | Displays dare infos for donor | ❌ |
 
-router.get('/:id/donor', async (req, res, next) => {
+router.get('/:id/donor', routeGuard, async (req, res, next) => {
   try {
     const dare = await Dare.findById(req.params.id)
       .populate('template')

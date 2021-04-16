@@ -1,0 +1,18 @@
+@import "variables";
+
+.DareList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  a {
+    margin: 2em 1em;
+    height: 20em;
+    width: 12em;
+  }
+
+  a:hover {
+    height: 20.5em;
+    width: 12.5em;
+    margin: 1.5em 0.5em;
+  }
+}

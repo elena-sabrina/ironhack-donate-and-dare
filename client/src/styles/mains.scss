@@ -45,3 +45,55 @@ a {
   margin: 0 auto;
   padding: 0 1em;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  p {
+    padding: 12px 0px 12px 0px;
+    margin: 0 15px;
+    font-size: 1.5em;
+  }
+
+  input {
+    background-color: white;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    margin: 10px 15px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  button {
+    margin: 10px 15px;
+  }
+
+  select {
+    padding: 12px 24px 12px 24px;
+    margin: 10px 15px;
+    border: none;
+    outline: none;
+    color: $black;
+    select:active {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+button {
+  border: none;
+  background-color: $orange;
+  color: white;
+  padding: 12px 24px 12px 24px;
+  margin: 10px 15px 10px 0;
+  width: auto;
+  button:active {
+    border: none;
+    outline: none;
+  }
+}

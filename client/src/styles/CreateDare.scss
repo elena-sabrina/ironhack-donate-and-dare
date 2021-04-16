@@ -1,18 +1,21 @@
 @import "variables";
 
 .CreateDare {
-  .TemplateItem {
-    margin: 1em;
+  .side-by-side {
+    display: flex;
+    width: 100%;
 
-    height: 20em;
-    width: 12em;
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
+    .Template {
+      margin: 0 100px;
+      flex: 1;
+      color: red;
+    }
 
-    a:hover {
-      height: 20.5em;
-      width: 12.5em;
-      margin: 0.5em;
+    form {
+      margin: 0 0 100px 0;
+      flex: 1;
+      text-align: left;
+      vertical-align: top;
     }
   }
 }
