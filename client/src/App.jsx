@@ -71,13 +71,7 @@ class App extends Component {
             component={CreateDareConfirmation}
             exact
           />
-          <ProtectedRoute
-            path='/dare/:id/donor'
-            component={ActiveDonor}
-            authorized={donor}
-            redirect='/sign-in'
-            exact
-          />
+          <Route path='/dare/:id/donor' component={ActiveDonor} exact />
           <Route path='/dare/:id/dared' component={ActiveDared} exact />
 
           <ProtectedRoute

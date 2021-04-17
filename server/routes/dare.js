@@ -75,7 +75,8 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
         email: daredemail
       },
       price,
-      payment_id: payment.id
+      payment_id: payment.id,
+      status: 'dare-sent'
     });
 
     console.log('dare', dare);

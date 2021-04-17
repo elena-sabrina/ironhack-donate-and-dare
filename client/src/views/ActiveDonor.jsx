@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { loadDareforDonor } from "./../services/dare.js";
 
+import DonorStati from "../components/DonorStati/DonorStati";
+
 export class Dare extends Component {
   state = {
     dare: null
@@ -9,17 +11,16 @@ export class Dare extends Component {
   async componentDidMount() {
     const dare = await loadDareforDonor(this.props.match.params.id);
     console.log(dare);
+    console.log(dare.status);
     this.setState({ dare });
   }
 
   render() {
     return (
-      <div className="Body">
+      <div className='Body'>
         {(this.state.dare && (
           <>
-            <h1>Donor: You have dared {this.state.dare.dared.name} </h1>
-
-            <p>{this.state.dare.template.name}</p>
+            <DonorStati dare={this.state.dare} />
           </>
         )) || <p>Error no dare found</p>}
       </div>
