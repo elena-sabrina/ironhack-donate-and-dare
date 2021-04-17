@@ -19,7 +19,6 @@ export class Profile extends Component {
     this.setState({ dares, donor });
   }
 
-
   render() {
     return (
       <div className='Body Profile'>
@@ -31,7 +30,7 @@ export class Profile extends Component {
 
               <p>Email: {this.state.donor.email}</p>
               <p>Password: *** </p>
-              
+
               <button>
                 <Link to='/profile-edit'>Edit Details</Link>
               </button>

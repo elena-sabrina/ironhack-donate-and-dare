@@ -12,8 +12,7 @@ const templateschema = new mongoose.Schema({
     trim: true
   },
   image: {
-    type: String,
-    trim: true
+    type: String
   },
   price: {
       type: Number

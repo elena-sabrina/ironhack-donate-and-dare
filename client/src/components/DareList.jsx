@@ -3,12 +3,12 @@ import DareItem from "./DareItem";
 
 import "./../styles/DareList.scss";
 
-const DareList = ({ dares }) => {
+const DareList = ({ dares, donor }) => {
   return (
     <div className='DareList'>
       {dares.map((dare) => (
         <Link key={dare._id} to={`/dare/${dare._id}/donor`}>
-          <DareItem dare={dare} />
+          <DareItem dare={dare} donor={donor}/>
         </Link>
       ))}
     </div>

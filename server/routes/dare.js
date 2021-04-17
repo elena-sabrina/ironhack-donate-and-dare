@@ -7,6 +7,7 @@ const Template = require('./../models/template');
 const Dare = require('./../models/dare');
 
 const routeGuard = require('./../middleware/route-guard');
+const uploadMiddleware = require('./../middleware/file-upload');
 
 const router = new express.Router();
 

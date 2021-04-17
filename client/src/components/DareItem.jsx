@@ -13,8 +13,8 @@ const DareItem = ({ donor, dare }) => {
         <p className='Price'>{dare.price} Euros</p>
         <p>To {dare.charity}</p>
         <h6>Donor</h6>
-        <p>{dare.donor.name}</p>
-        <p>{dare.donor.email}</p>
+        <p>{donor.name}</p>
+        <p>{donor.email}</p>
         <h6>Dared</h6>
         <p>{dare.dared.name}</p>
         <p>{dare.dared.email}</p>

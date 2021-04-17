@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { loadDare } from "./../services/checkout.js";
+import PaymentForm from "../components/PaymentForm";
+
+const StripePublicApiKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 class Checkout extends Component {
   state = {
@@ -10,20 +13,26 @@ class Checkout extends Component {
     console.log("compdidmount checkout");
     console.log(this.props.match.params.id);
     const dare = await loadDare(this.props.match.params.id);
-    console.log(dare);
     this.setState({ dare });
   }
 
+  handlePaymentFormSubmission = ({ token }) => {
+    console.log("Paymentform submitted and token received", token);
+  };
+
   render() {
     return (
-      <div className="Body">
-        <h1>Checkout</h1>
+      <div className='Body'>
         {(this.state.dare && (
           <>
-            <h1>Donate your dare: </h1>
-            <p>{this.state.dare.template.name}</p>
-            <p>{this.state.dare.template.description}</p>
-            <p>{this.state.dare.dared.name}</p>
+            <h1>
+              Thank you for donating {this.state.dare.price} to
+              {this.state.dare.charity}
+            </h1>
+            <PaymentForm
+              publicKey={StripePublicApiKey}
+              onSubmit={this.handlePaymentFormSubmission}
+            />
           </>
         )) || <p>Error no dare found</p>}
       </div>

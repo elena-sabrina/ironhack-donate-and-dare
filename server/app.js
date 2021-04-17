@@ -11,6 +11,12 @@ const serveFavicon = require('serve-favicon');
 const basicAuthenticationDeserializer = require('./middleware/basic-authentication-deserializer.js');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 
+//NODEMAILER
+
+//const dotenv = require('dotenv');
+//dotenv.config();
+//const nodemailer = require('./middleware/nodemailer.js');
+
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const dareRouter = require('./routes/dare');
