@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./CreateDare.scss";
-import { loadTemplate } from "./../services/dare.js";
+import { createDare, loadTemplate } from "./../services/dare.js";
 
 import TemplateItem from "../components/TemplateItem";
 import PaymentForm from "../components/PaymentForm";
@@ -10,13 +10,41 @@ const StripePublicApiKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 export class CreateDare extends Component {
   state = {
-    template: null
+    template: null,
+    daredname: "",
+    daredemail: "",
+    price: "",
+    charity: ""
   };
 
   async componentDidMount() {
     const template = await loadTemplate(this.props.match.params.id);
     this.setState({ template });
   }
+
+  handleFormSubmission = async ({ token }) => {
+    const { daredname, daredemail, price, charity } = this.state;
+
+    const data = {
+      daredname,
+      daredemail,
+      price,
+      charity,
+      token
+    };
+
+    const dare = await createDare(this.props.match.params.id, data);
+
+    this.props.history.push(`/${dare._id}/donor`);
+  };
+
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     return (
       <div className='Body CreateDare'>
@@ -24,7 +52,60 @@ export class CreateDare extends Component {
           <>
             <h1>Create {this.state.template.name}</h1>
             <div className='side-by-side'>
-              
+              <PaymentForm
+                publicKey={StripePublicApiKey}
+                onPaymentFormSubmit={this.handlePaymentFormSubmission}
+              >
+                <p>Whom do you want to send your dare to?</p>
+
+                <input
+                  id='input-daredname'
+                  name='daredname'
+                  type='text'
+                  placeholder='Name'
+                  value={this.state.daredname}
+                  onChange={this.handleInputChange}
+                  required
+                />
+
+                <input
+                  id='input-daredemail'
+                  name='daredemail'
+                  type='text'
+                  placeholder='Email'
+                  value={this.state.daredemail}
+                  onChange={this.handleInputChange}
+                  required
+                />
+
+                <p>Whom do you want to donate your dare to?</p>
+
+                <select
+                  id='input-charity'
+                  name='charity'
+                  value={this.state.charity}
+                  onChange={this.handleInputChange}
+                  required
+                >
+                  <option className='placeholder' value='' disabled>
+                    Charity
+                  </option>
+                  <option value='bali-children'>Bali Children</option>
+                  <option value='street-paw'>Street Paw</option>
+                  <option value='solemen'>Solemen</option>
+                </select>
+
+                <p>Do you want to top-up your donation?</p>
+                <input
+                  id='input-price'
+                  name='price'
+                  type='number'
+                  placeholder='this.state.template.price'
+                  value={this.state.price}
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </PaymentForm>
 
               <div className='Template'>
                 <TemplateItem template={this.state.template} />

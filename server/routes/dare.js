@@ -47,9 +47,12 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
     const donor = req.donor._id;
     console.log('req.donor._id passes the donor:');
     console.log(donor);
-    const { daredname, daredemail, price } = req.body;
+    const { daredname, daredemail, price, token } = req.body;
     console.log('req.body passes:');
     console.log(req.body);
+
+
+    
     const dare = await Dare.create({
       template: {
         _id: template._id,

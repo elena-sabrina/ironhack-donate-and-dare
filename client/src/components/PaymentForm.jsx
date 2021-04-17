@@ -22,33 +22,12 @@ class PaymentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      template: null,
-      daredname: "",
-      daredemail: "",
-      price: "",
-      charity: "",
       stripePromise: loadStripe(this.props.publicKey)
     };
   }
 
-  async componentDidMount() {
-    const template = await loadTemplate(this.props.match.params.id);
-    this.setState({ template });
-  }
-
   handleFormSubmission = async (event, { elements, stripe }) => {
     event.preventDefault();
-
-    const { daredname, daredemail, price, charity } = this.state;
-
-    const data = {
-      daredname,
-      daredemail,
-      price,
-      charity
-    };
-
-    const dare = await createDare(this.props.match.params.id, data);
 
     if (!elements || !stripe) return;
     const cardElement = elements.getElement(CardElement);
@@ -64,9 +43,8 @@ class PaymentForm extends Component {
       throw error;
     } else {
       const token = paymentMethod.id;
-      this.props.onSubmit({ token });
+      this.props.onPaymentFormSubmit({ token });
     }
-    this.props.history.push(`/${dare._id}/donor`);
   };
 
   handleInputChange = (event) => {
@@ -88,56 +66,6 @@ class PaymentForm extends Component {
                 }
               >
                 {this.props.children}
-
-                <p>Whom do you want to send your dare to?</p>
-
-                <input
-                  id='input-daredname'
-                  name='daredname'
-                  type='text'
-                  placeholder='Name'
-                  value={this.state.daredname}
-                  onChange={this.handleInputChange}
-                  required
-                />
-
-                <input
-                  id='input-daredemail'
-                  name='daredemail'
-                  type='text'
-                  placeholder='Email'
-                  value={this.state.daredemail}
-                  onChange={this.handleInputChange}
-                  required
-                />
-
-                <p>Whom do you want to donate your dare to?</p>
-
-                <select
-                  id='input-charity'
-                  name='charity'
-                  value={this.state.charity}
-                  onChange={this.handleInputChange}
-                  required
-                >
-                  <option className='placeholder' value='' disabled>
-                    Charity
-                  </option>
-                  <option value='bali-children'>Bali Children</option>
-                  <option value='street-paw'>Street Paw</option>
-                  <option value='solemen'>Solemen</option>
-                </select>
-
-                <p>Do you want to top-up your donation?</p>
-                <input
-                  id='input-price'
-                  name='price'
-                  type='number'
-                  placeholder='this.state.template.price'
-                  value={this.state.price}
-                  onChange={this.handleInputChange}
-                  required
-                />
 
                 <label>Credit Card Details</label>
                 <div>
