@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import DareItem from "./DareItem";
 
-import "./../styles/DareList.scss";
+import "./DareList.scss";
 
 const DareList = ({ dares, donor }) => {
   return (

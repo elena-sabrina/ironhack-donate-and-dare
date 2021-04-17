@@ -21,7 +21,7 @@ class PaymentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stripePromise: loadStripe(props.publicKey)
+      stripePromise: loadStripe(this.props.publicKey)
     };
   }
 

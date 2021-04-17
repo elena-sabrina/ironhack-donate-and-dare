@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./../styles/DareItem.scss";
+import "./DareItem.scss";
 
 import glass from "./../styles/images/glass.jpg";
 

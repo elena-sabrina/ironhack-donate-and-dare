@@ -3,7 +3,7 @@ import { createDare, loadTemplate } from "./../services/dare.js";
 
 import TemplateItem from "../components/TemplateItem";
 
-import "./../styles/CreateDare.scss";
+import "./CreateDare.scss";
 
 export class CreateDare extends Component {
   state = {

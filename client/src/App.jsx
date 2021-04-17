@@ -16,16 +16,20 @@ import EditProfile from "./views/EditProfile";
 import SignIn from "./views/SignIn";
 import SignUp from "./views/SignUp";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Navbar from "./components/Navbar";
 
 class App extends Component {
   state = {
-    donor: null
+    donor: null,
+    loaded: false
   };
 
   async componentDidMount() {
     const donor = await verify();
-    this.setState({ donor });
+    this.handleUserChange(donor);
+    this.setState({ loaded: true });
   }
 
   handleUserChange = (donor) => {
@@ -38,34 +42,54 @@ class App extends Component {
   };
 
   render() {
+    const donor = this.state.donor;
     return (
       <BrowserRouter>
-        <Navbar donor={this.state.donor} onSignOut={this.handleSignOut} />
+        <Navbar donor={donor} onSignOut={this.handleSignOut} />
 
         <Switch>
-          <Route
+          <ProtectedRoute
             path='/profile/:id'
             render={(props) => <Profile {...props} donor={this.state.donor} />}
+            authorized={donor}
+            redirect='/sign-in'
             exact
           />
+
           <Route path='/dare/all' component={Dares} exact />
           <Route path='/' component={Home} exact />
 
-          <Route
+          <ProtectedRoute
             path='/dare/create/:id'
             render={(props) => (
               <CreateDare {...props} donor={this.state.donor} />
             )}
+            authorized={donor}
+            redirect='/sign-in'
             exact
           />
-          <Route path='/checkout/:id' component={Checkout} exact />
+          <ProtectedRoute
+            path='/checkout/:id'
+            component={Checkout}
+            authorized={donor}
+            redirect='/sign-in'
+            exact
+          />
 
-          <Route
+          <ProtectedRoute
             path='dare/checkout/confirmation'
             component={CheckoutConfirmation}
+            authorized={donor}
+            redirect='/sign-in'
             exact
           />
-          <Route path='/dare/:id/donor' component={ActiveDonor} exact />
+          <ProtectedRoute
+            path='/dare/:id/donor'
+            component={ActiveDonor}
+            authorized={donor}
+            redirect='/sign-in'
+            exact
+          />
           <Route path='/dare/:id/dared' component={ActiveDared} exact />
 
           <Route
@@ -74,7 +98,13 @@ class App extends Component {
             exact
           />
 
-          <Route path='/profile/edit' component={EditProfile} exact />
+          <ProtectedRoute
+            path='/profile/edit'
+            component={EditProfile}
+            authorized={donor}
+            redirect='/sign-in'
+            exact
+          />
 
           <Route
             path='/sign-in'

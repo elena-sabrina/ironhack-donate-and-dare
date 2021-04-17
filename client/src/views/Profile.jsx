@@ -3,7 +3,7 @@ import { loadDares } from "./../services/dare.js";
 import { Link } from "react-router-dom";
 
 import DareList from "../components/DareList";
-import "./../styles/Profile.scss";
+import "./Profile.scss";
 
 export class Profile extends Component {
   state = {

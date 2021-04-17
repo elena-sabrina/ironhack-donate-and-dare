@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import TemplateItem from "./TemplateItem";
 
-import "./../styles/TemplateList.scss";
+import "./TemplateList.scss";
 
 const TemplateList = ({ templates }) => {
   return (

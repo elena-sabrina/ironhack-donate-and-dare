@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import "./../styles/Navbar.scss";
+import "./Navbar.scss";
 
 const Navbar = ({ donor, onSignOut }) => {
   return (

@@ -18,9 +18,12 @@ router.get('/profile/:id', routeGuard, async (req, res, next) => {
   try {
     const dares = await Dare.find({
       donor: { _id: req.session.donorId }
-    });
+    })
+      .populate('donor')
+      .populate('template');
 
     console.log('profile/:id passes');
+    console.log(dares);
 
     const donor = await Donor.findOne({ _id: req.session.donorId });
     console.log('donor');
