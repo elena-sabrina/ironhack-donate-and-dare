@@ -59,13 +59,11 @@ class App extends Component {
           <Route path='/dare/all' component={Dares} exact />
           <Route path='/' component={Home} exact />
 
-          <ProtectedRoute
+          <Route
             path='/dare/create/:id'
             render={(props) => (
               <CreateDare {...props} donor={this.state.donor} />
             )}
-            authorized={donor}
-            redirect='/sign-in'
             exact
           />
           <ProtectedRoute

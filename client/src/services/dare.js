@@ -13,6 +13,7 @@ export const listTemplates = async () => {
 export const loadTemplate = async (id) => {
   console.log("services loaddTemplate running");
   const response = await api.get(`/dare/create/${id}`);
+  console.log("loadtemplate answer", response.data.template);
   return response.data.template;
 };
 

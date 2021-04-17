@@ -1,47 +1,32 @@
 import React, { Component } from "react";
 import { createDare, loadTemplate } from "./../services/dare.js";
 
+import TemplateItem from "../components/TemplateItem";
+import PaymentForm from "../components/PaymentForm";
 
-import {
-  Elements,
-  ElementsConsumer,
-  CardElement
-} from "@stripe/react-stripe-js";
+const StripePublicApiKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
-import { loadStripe } from "@stripe/stripe-js";
+import "./CreateDare.scss";
 
-const cardStyles = {
-  base: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-    fontSize: "16px",
-    fontSmoothing: "antialiased"
-  }
-};
-
-class PaymentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      template: null,
-      daredname: "",
-      daredemail: "",
-      price: "",
-      charity: "",
-      stripePromise: loadStripe(this.props.publicKey)
-    };
-  }
+export class CreateDare extends Component {
+  state = {
+    template: null,
+    daredname: "",
+    daredemail: "",
+    price: "",
+    charity: ""
+  };
 
   async componentDidMount() {
     const template = await loadTemplate(this.props.match.params.id);
     this.setState({ template });
   }
 
-  handleFormSubmission = async (event, { elements, stripe }) => {
+  handlePaymentSubmission = async (event, { token }) => {
     event.preventDefault();
-
     const { daredname, daredemail, price, charity } = this.state;
-
+    console.log(price);
+    console.log(charity);
     const data = {
       daredname,
       daredemail,
@@ -50,24 +35,8 @@ class PaymentForm extends Component {
     };
 
     const dare = await createDare(this.props.match.params.id, data);
-
-    if (!elements || !stripe) return;
-    const cardElement = elements.getElement(CardElement);
-
-    const result = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement
-    });
-
-    const { paymentMethod, error } = result;
-
-    if (error) {
-      throw error;
-    } else {
-      const token = paymentMethod.id;
-      this.props.onSubmit({ token });
-    }
-    this.props.history.push(`/${dare._id}/donor`);
+    console.log("Paymentform submitted and token received", token);
+    this.props.history.push(`/checkout/${dare._id}`);
   };
 
   handleInputChange = (event) => {
@@ -78,18 +47,15 @@ class PaymentForm extends Component {
   };
 
   render() {
-    return (
-      <Elements stripe={this.state.stripePromise}>
-        <ElementsConsumer>
-          {({ elements, stripe }) => {
-            return (
-              <form
-                onSubmit={(event) =>
-                  this.handleFormSubmission(event, { elements, stripe })
-                }
-              >
-                {this.props.children}
+    //const { name, template, daredname, daredemail } = this.state;
 
+    return (
+      <div className='Body CreateDare'>
+        {(this.state.template && (
+          <>
+            <h1>Create {this.state.template.name}</h1>
+            <div className='side-by-side'>
+              <form onSubmit={this.handleFormSubmission}>
                 <p>Whom do you want to send your dare to?</p>
 
                 <input
@@ -134,24 +100,26 @@ class PaymentForm extends Component {
                   id='input-price'
                   name='price'
                   type='number'
-                  placeholder='this.state.template.price'
+                  placeholder={this.state.template.price}
                   value={this.state.price}
                   onChange={this.handleInputChange}
                   required
                 />
-
-                <label>Credit Card Details</label>
-                <div>
-                  <CardElement options={{ style: cardStyles }} />
-                </div>
-                <button>Donate Now</button>
+                <button>Create</button>
               </form>
-            );
-          }}
-        </ElementsConsumer>
-      </Elements>
+              <PaymentForm
+                publicKey={StripePublicApiKey}
+                onSubmit={this.handlePaymentFormSubmission}
+              />
+              <div className='Template'>
+                <TemplateItem template={this.state.template} />
+              </div>
+            </div>
+          </>
+        )) || <p>Error no template found</p>}
+      </div>
     );
   }
 }
 
-export default PaymentForm;
+export default CreateDare;
