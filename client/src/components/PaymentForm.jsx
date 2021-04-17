@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { createDare, loadTemplate } from "./../services/dare.js";
 
 import {
   Elements,
@@ -28,6 +27,7 @@ class PaymentForm extends Component {
 
   handleFormSubmission = async (event, { elements, stripe }) => {
     event.preventDefault();
+    console.log("handleFormSubmission is ruuuunnning");
 
     if (!elements || !stripe) return;
     const cardElement = elements.getElement(CardElement);
@@ -38,11 +38,14 @@ class PaymentForm extends Component {
     });
 
     const { paymentMethod, error } = result;
+    console.log(paymentMethod, error);
 
     if (error) {
       throw error;
     } else {
       const token = paymentMethod.id;
+      console.log("token:");
+      console.log(token);
       this.props.onPaymentFormSubmit({ token });
     }
   };

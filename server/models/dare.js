@@ -19,6 +19,10 @@ const dareschema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  payment_id: {
+    type: String,
+    trim: true
+  },
   dared: {
     name: {
       type: String,

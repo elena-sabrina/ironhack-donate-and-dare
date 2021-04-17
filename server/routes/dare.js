@@ -8,6 +8,7 @@ const Dare = require('./../models/dare');
 
 const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
+const processPayment = require('./../utilities/process-payment');
 
 const router = new express.Router();
 
@@ -51,8 +52,15 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
     console.log('req.body passes:');
     console.log(req.body);
 
+    console.log('token', token);
 
-    
+    const payment = await processPayment({
+      token,
+      amount: Math.floor(price * 100),
+      currency: 'EUR'
+    });
+    console.log('paymentId', payment.id);
+
     const dare = await Dare.create({
       template: {
         _id: template._id,
@@ -66,10 +74,13 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
         name: daredname,
         email: daredemail
       },
-      price
+      price,
+      payment_id: payment.id
     });
-    res.json({ dare });
-    console.log({ dare });
+
+    console.log('dare', dare);
+
+    res.json({ dare, payment });
   } catch (error) {
     next(error);
   }

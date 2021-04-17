@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./TemplateItem.scss";
 
 import glass from "./../styles/images/glass.jpg";
