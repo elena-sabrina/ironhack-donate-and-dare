@@ -72,6 +72,22 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
   }
 });
 
+//| GET | /dare/id/confirmation | Say Dare is created and email sent| ❌ |
+
+router.get('/:id/confirmation', routeGuard, async (req, res, next) => {
+  try {
+    const dare = await Dare.findById(req.params.id)
+      .populate('template')
+      .populate('donor');
+
+    console.log('dare/:id/confirmation passes');
+    console.log(dare);
+    res.json({ dare });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //| GET | /dare/id/donor | Displays dare infos for donor | ❌ |
 
 router.get('/:id/donor', routeGuard, async (req, res, next) => {

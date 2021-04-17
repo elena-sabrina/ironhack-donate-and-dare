@@ -6,11 +6,10 @@ import "./styles/mains.scss";
 import Home from "./views/Home";
 import Dares from "./views/Dares";
 import CreateDare from "./views/CreateDare";
-import Checkout from "./views/Checkout";
-import CheckoutConfirmation from "./views/CheckoutConfirmation";
+import CreateDareConfirmation from "./views/CreateDareConfirmation";
 import ActiveDonor from "./views/ActiveDonor";
 import ActiveDared from "./views/ActiveDared";
-import DareConfirmation from "./views/DareConfirmation";
+
 import Profile from "./views/Profile";
 import EditProfile from "./views/EditProfile";
 import SignIn from "./views/SignIn";
@@ -66,19 +65,10 @@ class App extends Component {
             )}
             exact
           />
-          <ProtectedRoute
-            path='/checkout/:id'
-            component={Checkout}
-            authorized={donor}
-            redirect='/sign-in'
-            exact
-          />
 
-          <ProtectedRoute
-            path='dare/checkout/confirmation'
-            component={CheckoutConfirmation}
-            authorized={donor}
-            redirect='/sign-in'
+          <Route
+            path='/dare/create/:id/confirmation'
+            component={CreateDareConfirmation}
             exact
           />
           <ProtectedRoute
@@ -89,12 +79,6 @@ class App extends Component {
             exact
           />
           <Route path='/dare/:id/dared' component={ActiveDared} exact />
-
-          <Route
-            path='/dare/id/confirmation'
-            component={DareConfirmation}
-            exact
-          />
 
           <ProtectedRoute
             path='/profile/edit'

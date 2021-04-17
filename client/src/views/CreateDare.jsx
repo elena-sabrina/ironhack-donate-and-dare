@@ -24,11 +24,7 @@ export class CreateDare extends Component {
           <>
             <h1>Create {this.state.template.name}</h1>
             <div className='side-by-side'>
-              <PaymentForm
-                publicKey={StripePublicApiKey}
-                onSubmit={this.handlePaymentFormSubmission}
-                template={this.state.template}
-              />
+              
 
               <div className='Template'>
                 <TemplateItem template={this.state.template} />

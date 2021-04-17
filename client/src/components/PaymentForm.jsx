@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { createDare, loadTemplate } from "./../services/dare.js";
 
-
 import {
   Elements,
   ElementsConsumer,
