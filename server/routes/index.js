@@ -36,9 +36,32 @@ router.get('/profile/:id', routeGuard, async (req, res, next) => {
 });
 
 router.patch('/profile/:id', routeGuard, async (req, res, next) => {
-  console.log('route patch');
-  console.log(req.body);
-  console.log(req.user._id);
+  try {
+    const donorId = req.session.donorId;
+    console.log('donor:', donorId);
+    console.log('req.body passes:');
+    console.log(req.body);
+    const { name, email, password } = req.body;
+    const donor = await Donor.findByIdAndUpdate(
+      donorId,
+      {
+        $set: {
+          name,
+          email,
+          password
+        }
+      },
+      { new: true }
+    );
+
+    console.log('donor');
+    console.log(donor);
+
+    res.json({ donor });
+  } catch (error) {
+    next(error);
+  }
+
   /*
   Donor.findByIdAndUpdate(userId, {
       name: data.name,

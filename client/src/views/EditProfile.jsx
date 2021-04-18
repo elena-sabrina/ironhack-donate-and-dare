@@ -25,17 +25,17 @@ export class EditProfile extends Component {
 
   handleFormSubmission = async (event) => {
     event.preventDefault();
-
     const { name, email, password } = this.state;
-    console.log(name, email, password);
-    /*const donor = await editProfile({
+    const { donor } = await editProfile(this.props.match.params.id, {
       name,
       email,
       password
     });
+
     console.log(donor);
     //this.props.onUserChange(donor);
-    this.props.history.push(`/profile/${donor._id}`);*/
+    //this.props.history.push(`/profile/${donor._id}`);
+    this.props.history.push(`/`);
   };
 
   handleInputChange = (event) => {

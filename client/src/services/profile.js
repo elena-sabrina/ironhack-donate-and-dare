@@ -7,14 +7,13 @@ const api = axios.create({
 
 export const loadDonorAndDares = async (id) => {
   const response = await api.get(`/profile/${id}`);
-
   const dares = response.data.dares;
   const donor = response.data.donor;
   return { dares, donor };
 };
 
-
 export const editProfile = async (id, data) => {
   const response = await api.patch(`/profile/${id}`, data);
-  return response.data.user;
+
+  return response.data.donor;
 };
