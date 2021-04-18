@@ -14,6 +14,7 @@ export const loadDonorAndDares = async (id) => {
 
 export const editProfile = async (id, data) => {
   const response = await api.patch(`/profile/${id}`, data);
+  console.log("editprofile response services", response.data);
 
-  return response.data.donor;
+  return response.data;
 };

@@ -32,10 +32,9 @@ export class EditProfile extends Component {
       password
     });
 
-    console.log(donor);
-    //this.props.onUserChange(donor);
-    //this.props.history.push(`/profile/${donor._id}`);
-    this.props.history.push(`/`);
+    console.log("newdonorinfo", donor);
+
+    this.props.history.push(`/profile/${donor._id}`);
   };
 
   handleInputChange = (event) => {
