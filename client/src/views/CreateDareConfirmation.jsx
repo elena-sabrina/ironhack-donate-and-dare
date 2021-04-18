@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { loadDareforDonorConfirmation } from "./../services/dare.js";
+import { loadDareforDonorConfirmation } from "./../services/createdare.js";
 
 export class CreateDareConfirmation extends Component {
   state = {

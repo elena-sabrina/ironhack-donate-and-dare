@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadDares } from "./../services/dare.js";
+import { loadDonorAndDares } from "./../services/profile.js";
 import { Link } from "react-router-dom";
 
 import DareList from "../components/DareList";
@@ -13,7 +13,9 @@ export class Profile extends Component {
 
   async componentDidMount() {
     console.log("moooouuuuuunting");
-    const { dares, donor } = await loadDares(this.props.match.params.id);
+    const { dares, donor } = await loadDonorAndDares(
+      this.props.match.params.id
+    );
     console.log("comp mount found donor & dares");
     console.log(donor);
     this.setState({ dares, donor });
@@ -32,7 +34,9 @@ export class Profile extends Component {
               <p>Password: *** </p>
 
               <button>
-                <Link to='/profile-edit'>Edit Details</Link>
+                <Link to={`/profile/${this.state.donor._id}/edit`}>
+                  Edit Details
+                </Link>
               </button>
             </section>
             <section>

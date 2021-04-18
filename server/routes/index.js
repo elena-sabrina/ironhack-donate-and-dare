@@ -35,4 +35,24 @@ router.get('/profile/:id', routeGuard, async (req, res, next) => {
   }
 });
 
+router.patch('/profile/:id', routeGuard, async (req, res, next) => {
+  console.log('route patch');
+  console.log(req.body);
+  console.log(req.user._id);
+  /*
+  Donor.findByIdAndUpdate(userId, {
+      name: data.name,
+      email: data.email,
+      //passwordHashAndSalt: passwordHashAndSalt
+    })
+      .then((users) => {
+        res.redirect('/profile');
+      })
+      .catch((error) => {
+        console.log(error);
+        next(error);
+      });
+  */
+});
+
 module.exports = router;

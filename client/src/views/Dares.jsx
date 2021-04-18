@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { listTemplates } from "./../services/dare";
+import { listTemplates } from "./../services/createdare";
 import TemplateList from "../components/TemplateList";
 
 class Dares extends Component {

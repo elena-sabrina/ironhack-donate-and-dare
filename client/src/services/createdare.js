@@ -25,29 +25,9 @@ export const createDare = async (id, data) => {
   return { dare, payment };
 };
 
-export const loadDares = async (id) => {
-  const response = await api.get(`/profile/${id}`);
-
-  const dares = response.data.dares;
-  const donor = response.data.donor;
-  return { dares, donor };
-};
-
 export const loadDareforDonorConfirmation = async (id) => {
   console.log("services loadDareforDonorConfirmation running");
   console.log("id:", id);
   const response = await api.get(`/dare/${id}/confirmation`);
-  return response.data.dare;
-};
-
-export const loadDareforDonor = async (id) => {
-  console.log("services loadDareforDonor running");
-  const response = await api.get(`/dare/${id}/donor`);
-  return response.data.dare;
-};
-
-export const loadDareforDared = async (id) => {
-  console.log("services loadDareforDared running");
-  const response = await api.get(`/dare/${id}/dared`);
   return response.data.dare;
 };

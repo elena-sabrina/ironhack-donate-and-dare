@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadDareforDared } from "./../services/dare.js";
+import { loadDareforDared } from "./../services/darestatus.js";
 
 export class Dare extends Component {
   state = {

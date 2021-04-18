@@ -75,7 +75,7 @@ class App extends Component {
           <Route path='/dare/:id/dared' component={ActiveDared} exact />
 
           <ProtectedRoute
-            path='/profile/edit'
+            path='/profile/:id/edit'
             component={EditProfile}
             authorized={donor}
             redirect='/sign-in'

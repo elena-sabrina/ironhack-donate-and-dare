@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./CreateDare.scss";
-import { createDare, loadTemplate } from "./../services/dare.js";
+import { createDare, loadTemplate } from "./../services/createdare.js";
 
 import TemplateItem from "../components/TemplateItem";
 import PaymentForm from "../components/PaymentForm";

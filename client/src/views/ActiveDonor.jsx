@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadDareforDonor } from "./../services/dare.js";
+import { loadDareforDonor } from "./../services/darestatus.js";
 
 import DonorStati from "../components/DonorStati/DonorStati";
 
