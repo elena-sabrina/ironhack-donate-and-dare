@@ -76,7 +76,8 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
       },
       price,
       payment_id: payment.id,
-      status: 'dare-sent'
+      status: 'dare-sent',
+      video: null
     });
 
     console.log('dare', dare);
@@ -154,14 +155,42 @@ router.get('/:id/dared', async (req, res, next) => {
       .populate('template')
       .populate('donor');
 
-    console.log('dare/:id/dared passes');
-    console.log(dare);
     res.json({ dare });
   } catch (error) {
     next(error);
   }
 });
 
-//| POST | /dare/id/dared | Allow dared to upload or reject dare | ❌ |
+//| PATCH | /dare/id/dared | Changing the state| ❌ |
+
+router.patch('/:id/dared', routeGuard, async (req, res, next) => {
+  try {
+    console.log('dare');
+
+    const dareId = req.params.id;
+    console.log(dareId);
+    console.log('req.body');
+    console.log(req.body);
+
+    /*
+
+    const dare = await Dare.findByIdAndUpdate(
+      dareId,
+      {
+        $set: {
+          video: 'dare-confirmed'
+        }
+      },
+      { new: true }
+    );
+*/
+    console.log('dare');
+    console.log(dare);
+
+    res.json({ dare });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

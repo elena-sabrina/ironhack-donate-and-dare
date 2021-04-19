@@ -1,25 +1,24 @@
 import React, { Component } from "react";
 import { loadDareforDared } from "./../services/darestatus.js";
 
-export class Dare extends Component {
+import DaredStati from "../components/DonorStati/DaredStati";
+
+export class ActiveDared extends Component {
   state = {
     dare: null
   };
 
   async componentDidMount() {
     const dare = await loadDareforDared(this.props.match.params.id);
-    console.log(dare);
     this.setState({ dare });
   }
 
   render() {
     return (
-      <div className="Body">
+      <div className='Body'>
         {(this.state.dare && (
           <>
-            <h1>Dared: You have been dared by {this.state.dare.dared.name} </h1>
-
-            <p>{this.state.dare.template.name}</p>
+            <DaredStati dare={this.state.dare} />
           </>
         )) || <p>Error no dare found</p>}
       </div>
@@ -27,4 +26,4 @@ export class Dare extends Component {
   }
 }
 
-export default Dare;
+export default ActiveDared;

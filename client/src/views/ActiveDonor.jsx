@@ -3,15 +3,14 @@ import { loadDareforDonor } from "./../services/darestatus.js";
 
 import DonorStati from "../components/DonorStati/DonorStati";
 
-export class Dare extends Component {
+export class ActiveDonor extends Component {
   state = {
     dare: null
   };
 
   async componentDidMount() {
     const dare = await loadDareforDonor(this.props.match.params.id);
-    console.log(dare);
-    console.log(dare.status);
+
     this.setState({ dare });
   }
 
@@ -28,4 +27,4 @@ export class Dare extends Component {
   }
 }
 
-export default Dare;
+export default ActiveDonor;
