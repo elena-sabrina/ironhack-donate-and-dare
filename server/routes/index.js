@@ -16,20 +16,32 @@ router.get('/', (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, async (req, res, next) => {
   try {
-    const dares = await Dare.find({
-      donor: { _id: req.session.donorId }
+    const daresent = await Dare.find({
+      $and: [{ donor: { _id: req.session.donorId } }, { status: 'dare-sent' }]
     })
       .populate('donor')
       .populate('template');
 
-    console.log('profile/:id passes');
-    console.log(dares);
+    const darevideouploaded = await Dare.find({
+      $and: [
+        { donor: { _id: req.session.donorId } },
+        { status: 'video-uploaded' }
+      ]
+    })
+      .populate('donor')
+      .populate('template');
+
+    const dareconfirmed = await Dare.find({
+      $and: [{ donor: { _id: req.session.donorId } }, { status: 'confirmed' }]
+    })
+      .populate('donor')
+      .populate('template');
 
     const donor = await Donor.findOne({ _id: req.session.donorId });
     console.log('donor');
     console.log(donor);
 
-    res.json({ donor, dares });
+    res.json({ donor, daresent, darevideouploaded, dareconfirmed });
   } catch (error) {
     next(error);
   }
@@ -61,8 +73,6 @@ router.patch('/profile/:id', routeGuard, async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
- 
 });
 
 module.exports = router;

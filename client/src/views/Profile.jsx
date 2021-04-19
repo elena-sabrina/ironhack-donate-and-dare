@@ -7,11 +7,25 @@ import "./Profile.scss";
 
 export class Profile extends Component {
   state = {
-    dares: [],
+    daresent: [],
+    darevideouploaded: [],
+    dareconfirmed: [],
     donor: null
   };
 
   async componentDidMount() {
+    console.log("moooouuuuuunting");
+    const {
+      daresent,
+      darevideouploaded,
+      dareconfirmed,
+      donor
+    } = await loadDonorAndDares(this.props.match.params.id);
+    console.log("comp mount found donor & dares");
+    console.log(dareconfirmed);
+    this.setState({ daresent, darevideouploaded, dareconfirmed, donor });
+  }
+  /* async componentDidMount() {
     console.log("moooouuuuuunting");
     const { dares, donor } = await loadDonorAndDares(
       this.props.match.params.id
@@ -19,7 +33,7 @@ export class Profile extends Component {
     console.log("comp mount found donor & dares");
     console.log(donor);
     this.setState({ dares, donor });
-  }
+  }*/
 
   render() {
     return (
@@ -39,15 +53,34 @@ export class Profile extends Component {
                 </Link>
               </button>
             </section>
+            <h2>Dares </h2>
             <section>
-              <h2>Open dares</h2>
+              <h3>Sent </h3>
               <div className='profile-darelist'>
-                <DareList dares={this.state.dares} donor={this.state.donor} />
+                <DareList
+                  dares={this.state.daresent}
+                  donor={this.state.donor}
+                />
+              </div>
+            </section>
+            <section>
+              <h3>To be confirmed</h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.darevideouploaded}
+                  donor={this.state.donor}
+                />
               </div>
             </section>
 
             <section>
-              <h2>Donations</h2>
+              <h3>Donated</h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.dareconfirmed}
+                  donor={this.state.donor}
+                />
+              </div>
             </section>
           </>
         )) || <p>Error no donor found</p>}
