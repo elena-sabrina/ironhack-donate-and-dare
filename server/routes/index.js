@@ -62,20 +62,7 @@ router.patch('/profile/:id', routeGuard, async (req, res, next) => {
     next(error);
   }
 
-  /*
-  Donor.findByIdAndUpdate(userId, {
-      name: data.name,
-      email: data.email,
-      //passwordHashAndSalt: passwordHashAndSalt
-    })
-      .then((users) => {
-        res.redirect('/profile');
-      })
-      .catch((error) => {
-        console.log(error);
-        next(error);
-      });
-  */
+ 
 });
 
 module.exports = router;

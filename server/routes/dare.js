@@ -119,7 +119,33 @@ router.get('/:id/donor', routeGuard, async (req, res, next) => {
   }
 });
 
-//| POST | /dare/id/donor | Allow donor to confirm or decline dare | ❌ |
+//| PATCH | /dare/id/donor | Changing the state| ❌ |
+
+router.patch('/:id/donor', routeGuard, async (req, res, next) => {
+  try {
+    console.log('dare');
+
+    const dareId = req.params.id;
+    console.log(dareId);
+
+    const dare = await Dare.findByIdAndUpdate(
+      dareId,
+      {
+        $set: {
+          status: 'dare-confirmed'
+        }
+      },
+      { new: true }
+    );
+
+    console.log('dare');
+    console.log(dare);
+
+    res.json({ dare });
+  } catch (error) {
+    next(error);
+  }
+});
 
 //| GET | /dare/id/dared | Displays dare infos for dared | ❌ |
 router.get('/:id/dared', async (req, res, next) => {

@@ -7,10 +7,10 @@ const DonorStati = ({ dare }) => {
     <div>
       {(dare.status === "dare-sent" && <DonorStatusDareSent dare={dare} />) ||
         (dare.status === "video-uploaded" && (
-          <DonorStatusDareConfirmed dare={dare} />
+          <DonorStatusDareUploaded dare={dare} />
         )) ||
         (dare.status === "confirmed" && (
-          <DonorStatusDareUploaded dare={dare} />
+          <DonorStatusDareConfirmed dare={dare} />
         )) || <p> Status not found</p>}
     </div>
   );
