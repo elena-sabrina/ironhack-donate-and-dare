@@ -42,9 +42,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
+    proxy: true, // Should allow cookie-setting with heroku proxied requests
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : false, // Can be used cross-site
+      secure: process.env.NODE_ENV === 'production' // App is running on heroku
     },
     store: new (connectMongo(expressSession))({
       mongooseConnection: mongoose.connection,
