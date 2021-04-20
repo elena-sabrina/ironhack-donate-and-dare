@@ -1,4 +1,4 @@
-import DareItem from "./../DareItem";
+// import DareItem from "./../DareItem";
 
 const DaredStatusDareConfirmed = ({ dare }) => {
   return (

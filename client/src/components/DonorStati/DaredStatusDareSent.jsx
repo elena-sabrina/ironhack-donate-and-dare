@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { videoUploaded } from "./../../services/darestatus.js";
+//import { videoUploaded } from "./../../services/darestatus.js";
 
 import DareItem from "./../DareItem";
 
@@ -31,7 +31,7 @@ export class DaredStatusDareSent extends Component {
     console.log("handleInputChange running");
     const { name, value } = event.target;
     this.setState({
-      name: value
+      [name]: value
     });
   };
 

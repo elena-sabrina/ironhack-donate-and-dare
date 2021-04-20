@@ -12,13 +12,8 @@ export class SignIn extends Component {
   handleFormSubmission = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    const donor = await signIn({
-      email,
-      password
-    });
-    console.log("donor:");
-    console.log(donor);
-    this.props.onUserChange(donor);
+    const donor = await signIn({ email, password });
+    this.props.onDonorChange(donor);
   };
 
   handleInputChange = (event) => {
@@ -30,7 +25,7 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <div className="Body">
+      <div className='Body'>
         <h1>Sign In</h1>
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor='email-input'>Email</label>

@@ -18,7 +18,7 @@ export class SignUp extends Component {
       password
     });
     console.log(donor);
-    this.props.onUserChange(donor);
+    this.props.onDonorChange(donor);
   };
 
   handleInputChange = (event) => {

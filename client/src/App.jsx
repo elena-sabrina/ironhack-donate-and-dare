@@ -27,17 +27,17 @@ class App extends Component {
 
   async componentDidMount() {
     const donor = await verify();
-    this.handleUserChange(donor);
+    this.handleDonorChange(donor);
     this.setState({ loaded: true });
   }
 
-  handleUserChange = (donor) => {
+  handleDonorChange = (donor) => {
     this.setState({ donor });
   };
 
   handleSignOut = async () => {
     await signOut();
-    this.handleUserChange(null);
+    this.handleDonorChange(null);
   };
 
   render() {
@@ -78,22 +78,27 @@ class App extends Component {
             path='/profile/:id/edit'
             component={EditProfile}
             authorized={donor}
-            redirect='/sign-in'
+            redirect='/profile/:id'
             exact
           />
 
-          <Route
+          <ProtectedRoute
             path='/sign-in'
             render={(props) => (
-              <SignIn {...props} onUserChange={this.handleUserChange} />
+              <SignIn {...props} onDonorChange={this.handleDonorChange} />
             )}
+            authorized={!donor}
+            redirect='/profile/:id'
             exact
           />
-          <Route
+
+          <ProtectedRoute
             path='/sign-up'
             render={(props) => (
-              <SignUp {...props} onUserChange={this.handleUserChange} />
+              <SignUp {...props} onDonorChange={this.handleDonorChange} />
             )}
+            authorized={!donor}
+            redirect='/profile/:id'
             exact
           />
         </Switch>

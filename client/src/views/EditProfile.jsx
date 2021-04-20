@@ -11,9 +11,7 @@ export class EditProfile extends Component {
   };
 
   async componentDidMount() {
-    const { dares, donor } = await loadDonorAndDares(
-      this.props.match.params.id
-    );
+    const { donor } = await loadDonorAndDares(this.props.match.params.id);
 
     this.setState({
       name: donor.name,
@@ -82,7 +80,7 @@ export class EditProfile extends Component {
             </form>
 
             <button>
-              <Link to='/profile/${donor._id}'>Go Back</Link>
+              <Link to={`/profile/${this.state.donor._id}`}>Go Back</Link>
             </button>
           </>
         )) || <p>Error no donor info found</p>}

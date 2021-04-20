@@ -53,6 +53,8 @@ export class Profile extends Component {
                 </Link>
               </button>
             </section>
+
+
             <h2>Dares </h2>
             <section>
               <h3>Sent </h3>
@@ -82,6 +84,9 @@ export class Profile extends Component {
                 />
               </div>
             </section>
+
+
+            
           </>
         )) || <p>Error no donor found</p>}
       </div>
