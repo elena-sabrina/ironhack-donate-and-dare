@@ -24,24 +24,27 @@ export class CreateDare extends Component {
 
   handlePaymentFormSubmission = async ({ token }) => {
     const { daredname, daredemail, price, charity } = this.state;
-    console.log("token");
-    console.log(token);
+    const oldprice = this.state.template.price;
 
-    const data = {
-      daredname,
-      daredemail,
-      price,
-      charity,
-      token
-    };
-
-    const { dare, payment } = await createDare(
-      this.props.match.params.id,
-      data
-    );
-    console.log("payment", payment);
-
-    this.props.history.push(`/dare/create/${dare._id}/confirmation`);
+    if (oldprice <= price) {
+      const data = {
+        daredname,
+        daredemail,
+        price,
+        charity,
+        token
+      };
+      const { dare, payment } = await createDare(
+        this.props.match.params.id,
+        data
+      );
+      console.log("payment", payment);
+      this.props.history.push(`/dare/create/${dare._id}/confirmation`);
+    } else {
+      alert(
+        "Hello! You cant donate less. But you're welcome to donate more..."
+      );
+    }
   };
 
   handleInputChange = (event) => {
@@ -50,6 +53,21 @@ export class CreateDare extends Component {
       [name]: value
     });
   };
+
+  /*handlePriceInputChange = (event) => {
+    const { name, value } = event.target;
+    const price = this.state.template.price;
+
+    if (price <= value) {
+      this.setState({
+        [name]: value
+      });
+    } else {
+      alert(
+        "Hello! You cant donate less. But you're welcome to donate more..."
+      );
+    }
+  };*/
 
   render() {
     return (
@@ -106,7 +124,7 @@ export class CreateDare extends Component {
                   id='input-price'
                   name='price'
                   type='number'
-                  placeholder='EURO'
+                  placeholder={this.state.template.price}
                   value={this.state.price}
                   onChange={this.handleInputChange}
                   required
