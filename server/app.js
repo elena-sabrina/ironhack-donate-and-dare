@@ -31,7 +31,7 @@ app.use(logger('dev'));
 
 app.use(
   cors({
-    origin: ['http://localhost:3001'],
+    origin: (process.env.ALLOWED_CORS_ORIGINS || '').split(','),
     credentials: true
   })
 );
@@ -57,7 +57,6 @@ app.use(bindUserToViewLocals);
 
 app.use('/', baseRouter);
 app.use('/authentication', authenticationRouter);
-
 app.use('/dare', dareRouter);
 app.use('/checkout', checkoutRouter);
 

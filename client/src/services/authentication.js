@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-  withCredentials: true
-});
+import api from './api';
 
 export const signIn = async (data) => {
   const response = await api.post("/authentication/sign-in", data);
@@ -30,5 +25,3 @@ export const verify = async () => {
 export const signOut = async () => {
   await api.post("/authentication/sign-out");
 };
-
-

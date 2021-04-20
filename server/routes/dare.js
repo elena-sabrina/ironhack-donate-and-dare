@@ -9,6 +9,7 @@ const Dare = require('./../models/dare');
 const routeGuard = require('./../middleware/route-guard');
 const uploadMiddleware = require('./../middleware/file-upload');
 const processPayment = require('./../utilities/process-payment');
+const sendEmail = require('./../utilities/send-email');
 
 const router = new express.Router();
 
@@ -81,6 +82,13 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
     });
 
     console.log('dare', dare);
+    /*await sendEmail({
+      receiver: 'hello@elena-sabrina.com',
+      subject: `You've been dared for a good cause`,
+      body: `
+      <p>... has dared you to ...</p>
+      `
+    });*/
 
     res.json({ dare, payment });
   } catch (error) {
