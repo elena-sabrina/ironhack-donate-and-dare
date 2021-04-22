@@ -1,37 +1,43 @@
 import React, { Component } from "react";
 
-//import { videoUploaded } from "./../../services/darestatus.js";
+import { videoUploaded } from "./../../services/darestatus.js";
 
 import DareItem from "../DareItem";
 
 export class DaredStatusDareSent extends Component {
   constructor(props) {
     super(props);
+
+    console.log("props C", this.props);
+    console.log("props C dare", this.props.dare);
     this.state = {
       dare: props.dare
     };
   }
 
   handleUploadVideoSubmission = async (event) => {
-    console.log("handleUploadVideoSubmission running");
-    /*const { video } = this.state;
-    console.log("video");
+    event.preventDefault();
+    console.log("handleUploadVideoSubmission ruuning");
+    const body = new FormData();
+    console.log(new FormData(););
+    /* const { video } = event.target;
     console.log(video);
+    body.append(video);
 
-    const dare = await videoUploaded(this.props.match.params.id, video);
-    console.log("newdareinfo", dare);
+    console.log(body);
+    const { dare } = await videoUploaded(this.state.dare._id, {
+      body
+    });
 
-    //this.props.history.push(`/dare/${this.state.dare._id}/dared`);
-    this.props.history.push("/");
-
-    */
+    this.props.onVideoPassed({ dare });*/
   };
 
-  handleInputChange = (event) => {
-    console.log("handleInputChange running");
-    const { name, value } = event.target;
+  handleFileInputChange = (event) => {
+    const { name, files } = event.target;
+    const arrayOfFiles = [];
+    for (const file of files) arrayOfFiles.push(file);
     this.setState({
-      [name]: value
+      [name]: arrayOfFiles
     });
   };
 
@@ -42,22 +48,23 @@ export class DaredStatusDareSent extends Component {
           Hey {this.state.dare.dared.name},you've been dared by{" "}
           {this.state.dare.donor.name}
         </h1>
-        <form onUploadVideoSubmit={this.handleUploadVideoSubmission}>
+        <form>
           <input
             id='input-video'
-            name='video'
-            type='text'
-            placeholder='Upload Video'
+            name='file'
+            type='file'
             value={this.state.video}
-            onChange={this.handleInputChange}
+            onChange={this.handleFileInputChange}
             required
           />
-          <button>Upload</button>
+
+          <button onClick={this.handleUploadVideoSubmission}>Upload</button>
         </form>
         <h5>Dare Status</h5>
         <p>Upload a video of you doing the dare to enable ... </p>
         <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
-      </div>
+
+      
     );
   }
 }

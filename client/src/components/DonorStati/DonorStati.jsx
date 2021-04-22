@@ -19,7 +19,6 @@ export class DonorStati extends Component {
   handleStatusHasChanged = async ({ dare }) => {
     console.log("lifting up B running");
     console.log('dare',dare);
-    // this.setState({dare: dare});
     this.props.onStatusChange({dare});
   };
 

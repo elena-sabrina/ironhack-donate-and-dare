@@ -4,21 +4,35 @@ import { loadDareforDared } from "./../services/darestatus.js";
 import DaredStati from "../components/DaredStati/DaredStati";
 
 export class ActiveDared extends Component {
-  state = {
-    dare: null
-  };
+  constructor(props) {
+    super(props);
+    console.log("props A", this.props);
+    console.log("props A dare", this.props.dare);
+    this.state = {
+      dare: null
+    };
+  }
 
   async componentDidMount() {
     const dare = await loadDareforDared(this.props.match.params.id);
     this.setState({ dare });
   }
+  handleVideoUploadSubmision = async ({ dare }) => {
+    console.log("lifting up B running");
+    console.log("dare", dare);
+    this.setState({ dare: dare });
+    this.props.history.push(`/profile/${this.state.dare.donor._id}`);
+  };
 
   render() {
     return (
       <div className='Body'>
         {(this.state.dare && (
           <>
-            <DaredStati dare={this.state.dare} />
+            <DaredStati
+              dare={this.state.dare}
+              onVideoUpload={this.handleVideoUploadSubmision}
+            />
           </>
         )) || <p>Error no dare found</p>}
       </div>

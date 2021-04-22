@@ -21,6 +21,6 @@ export const confirmorRejectDare = async (id, data) => {
 export const videoUploaded = async (id, data) => {
   console.log("videoUploaded running");
   const response = await api.patch(`/dare/${id}/dared`, data);
-  console.log("confirmDare response.data", response.data);
+  console.log("videoUploaded response.data", response.data);
   return response.data;
 };
