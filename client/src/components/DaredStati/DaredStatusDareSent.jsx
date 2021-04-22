@@ -11,34 +11,29 @@ export class DaredStatusDareSent extends Component {
     console.log("props C", this.props);
     console.log("props C dare", this.props.dare);
     this.state = {
-      dare: props.dare
+      dare: props.dare,
+      video: null
     };
   }
 
   handleUploadVideoSubmission = async (event) => {
     event.preventDefault();
-    console.log("handleUploadVideoSubmission ruuning");
-    const body = new FormData();
-    console.log(new FormData(););
-    /* const { video } = event.target;
+    const { video } = this.state;
     console.log(video);
-    body.append(video);
 
-    console.log(body);
     const { dare } = await videoUploaded(this.state.dare._id, {
-      body
+      video
     });
-
-    this.props.onVideoPassed({ dare });*/
+    console.log(dare.video);
+    this.props.onVideoPassed({ dare });
   };
 
-  handleFileInputChange = (event) => {
-    const { name, files } = event.target;
-    const arrayOfFiles = [];
-    for (const file of files) arrayOfFiles.push(file);
+  handleUrlInputChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      [name]: arrayOfFiles
+      [name]: value
     });
+    console.log(this.state.video);
   };
 
   render() {
@@ -50,11 +45,13 @@ export class DaredStatusDareSent extends Component {
         </h1>
         <form>
           <input
-            id='input-video'
-            name='file'
-            type='file'
+            id='input-url'
+            name='video'
+            type='url'
             value={this.state.video}
-            onChange={this.handleFileInputChange}
+            placebolder='http://'
+            onChange={this.handleUrlInputChange}
+            onblur='checkURL(this)'
             required
           />
 
@@ -63,8 +60,7 @@ export class DaredStatusDareSent extends Component {
         <h5>Dare Status</h5>
         <p>Upload a video of you doing the dare to enable ... </p>
         <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
-
-      
+      </div>
     );
   }
 }

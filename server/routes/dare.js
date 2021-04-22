@@ -204,33 +204,27 @@ router.get('/:id/dared', async (req, res, next) => {
 
 //| PATCH | /dare/id/dared | Changing the state| ❌ |
 
-router.patch(
-  '/:id/dared',
-  uploadMiddleware.single('picture'),
-  routeGuard,
-  async (req, res, next) => {
-    try {
-      console.log('patch /:id/dared ruuuunning');
-      const dareId = req.params.id;
-      const video = req.body.video;
-      const videopath = req.file.path;
-      console.log(videopath);
+router.patch('/:id/dared', routeGuard, async (req, res, next) => {
+  try {
+    console.log('patch /:id/dared ruuuunning');
+    const dareId = req.params.id;
+    const video = req.body.video;
 
-      const dare = await Dare.findByIdAndUpdate(
-        dareId,
-        {
-          $set: {
-            video: video
-          }
-        },
-        { new: true }
-      );
+    const dare = await Dare.findByIdAndUpdate(
+      dareId,
+      {
+        $set: {
+          video: video,
+          status: 'video-uploaded'
+        }
+      },
+      { new: true }
+    );
 
-      res.json({ dare });
-    } catch (error) {
-      next(error);
-    }
+    res.json({ dare });
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 module.exports = router;

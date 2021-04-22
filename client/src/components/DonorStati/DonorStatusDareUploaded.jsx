@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import { confirmorRejectDare } from "./../../services/darestatus.js";
 
@@ -20,7 +21,7 @@ export class DonorStatusDareUploaded extends Component {
     const { dare } = await confirmorRejectDare(this.state.dare._id, {
       confirmation: "confirming"
     });
-   // this.setState({ dare: dare });
+    // this.setState({ dare: dare });
     this.props.onStatusHasChanged({ dare });
   };
 
@@ -47,7 +48,11 @@ export class DonorStatusDareUploaded extends Component {
           confirmation:
         </h5>
         <p>Watch the video and confirm the dare</p>
-        <button>Watch video</button>
+        <button>
+          <Link to={this.state.dare.video} className='Logo'>
+            Watch video
+          </Link>
+        </button>
         <button onClick={this.handleDareConfirmation}>Confirm Dare</button>
         <button onClick={this.handleDareRejection}>Reject Dare</button>
 

@@ -21,7 +21,7 @@ export class ActiveDared extends Component {
     console.log("lifting up B running");
     console.log("dare", dare);
     this.setState({ dare: dare });
-    this.props.history.push(`/profile/${this.state.dare.donor._id}`);
+    this.props.history.push(`/dare/${this.state.dare._id}/dared`);
   };
 
   render() {
