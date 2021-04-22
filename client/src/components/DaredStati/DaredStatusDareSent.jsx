@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 //import { videoUploaded } from "./../../services/darestatus.js";
 
-import DareItem from "./../DareItem";
+import DareItem from "../DareItem";
 
 export class DaredStatusDareSent extends Component {
   constructor(props) {

@@ -30,8 +30,6 @@ export class EditProfile extends Component {
       password
     });
 
-    console.log("newdonorinfo", donor);
-
     this.props.history.push(`/profile/${donor._id}`);
   };
 

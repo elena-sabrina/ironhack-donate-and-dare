@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { loadDareforDared } from "./../services/darestatus.js";
 
-import DaredStati from "../components/DonorStati/DaredStati";
+import DaredStati from "../components/DaredStati/DaredStati";
 
 export class ActiveDared extends Component {
   state = {

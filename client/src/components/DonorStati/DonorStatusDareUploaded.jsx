@@ -17,15 +17,18 @@ export class DonorStatusDareUploaded extends Component {
       confirmation: "confirming"
     });
     console.log(dare._id);
-    this.props.history.push(`/dare/${dare._id}/donor`);
+    this.props.onStatusHasChange();
   };
 
   handleDareRejection = async (event) => {
     event.preventDefault();
+
     const { dare } = await confirmorRejectDare(this.state.dare._id, {
       confirmation: "rejected"
     });
-    this.props.history.push(`/dare/${dare._id}/donor`);
+    //const location = event.view.location.href;
+    //console.log(location);
+    //reload(location);
   };
 
   render() {

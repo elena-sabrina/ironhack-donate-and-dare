@@ -54,36 +54,26 @@ class App extends Component {
             redirect='/sign-in'
             exact
           />
+
           <Route path='/dare/all' component={Dares} exact />
           <Route path='/' component={Home} exact />
-          
-          <ProtectedRoute
+
+          <Route
             path='/dare/create/:id'
             render={(props) => (
               <CreateDare {...props} donor={this.state.donor} />
             )}
             exact
           />
+
           <Route
             path='/dare/create/:id/confirmation'
             component={CreateDareConfirmation}
             exact
           />
-          <ProtectedRoute
-            path='/dare/:id/donor'
-            component={ActiveDonor}
-            authorized={donor}
-            redirect='/'
-            exact
-          />
-          <Route
-            path='/dare/:id/dared'
-            component={ActiveDared}
-            authorized={!donor}
-            redirect='/'
-            exact
-          />{" "}
-          />
+          <Route path='/dare/:id/donor' component={ActiveDonor} />
+          <Route path='/dare/:id/dared' component={ActiveDared} exact />
+
           <ProtectedRoute
             path='/profile/:id/edit'
             component={EditProfile}
@@ -91,6 +81,7 @@ class App extends Component {
             redirect='/'
             exact
           />
+
           <ProtectedRoute
             path='/sign-in'
             render={(props) => (
@@ -100,6 +91,7 @@ class App extends Component {
             redirect='/'
             exact
           />
+
           <ProtectedRoute
             path='/sign-up'
             render={(props) => (

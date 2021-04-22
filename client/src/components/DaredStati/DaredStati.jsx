@@ -7,7 +7,10 @@ const DonorStati = ({ dare }) => {
     <div>
       {(dare.status === "dare-sent" && <DaredStatusDareSent dare={dare} />) ||
         (dare.status === "video-uploaded" && (
-          <DaredStatusDareUploaded dare={dare} />
+          <DaredStatusDareUploaded
+            dare={dare}
+            onStatusChange={this.handleStatusChangeSubmission}
+          />
         )) ||
         (dare.status === "confirmed" && (
           <DaredStatusDareConfirmed dare={dare} />

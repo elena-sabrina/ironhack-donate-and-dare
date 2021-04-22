@@ -10,16 +10,20 @@ export class ActiveDonor extends Component {
 
   async componentDidMount() {
     const dare = await loadDareforDonor(this.props.match.params.id);
-
     this.setState({ dare });
   }
+
+ async handleStatusChangeSubmission () {
+    console.log('heeeeeeeeeeeyyyyy');
+  }
+
 
   render() {
     return (
       <div className='Body'>
         {(this.state.dare && (
           <>
-            <DonorStati dare={this.state.dare} />
+            <DonorStati dare={this.state.dare} onStatusChange={this.handleStatusChangeSubmission}/>
           </>
         )) || <p>Error no dare found</p>}
       </div>
