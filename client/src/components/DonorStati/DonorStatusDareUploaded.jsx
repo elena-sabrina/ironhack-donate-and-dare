@@ -7,17 +7,21 @@ import DareItem from "./../DareItem";
 export class DonorStatusDareUploaded extends Component {
   constructor(props) {
     super(props);
+
+    console.log("props C", this.props);
+    console.log("props C dare", this.props.dare);
     this.state = {
       dare: props.dare
     };
   }
   handleDareConfirmation = async (event) => {
+    console.log("lifting up C running");
     event.preventDefault();
     const { dare } = await confirmorRejectDare(this.state.dare._id, {
       confirmation: "confirming"
     });
-    console.log(dare._id);
-    this.props.onStatusHasChange();
+   // this.setState({ dare: dare });
+    this.props.onStatusHasChanged({ dare });
   };
 
   handleDareRejection = async (event) => {

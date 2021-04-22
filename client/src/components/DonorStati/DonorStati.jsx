@@ -9,18 +9,19 @@ import DonorStatusDareRejected from "./DonorStatusDareRejected";
 export class DonorStati extends Component {
   constructor(props) {
     super(props);
+    console.log("props B", this.props);
+    console.log("props B dare", this.props.dare);
     this.state = {
       dare: props.dare
     };
   }
 
-  async StatusHasChanged() {
-    console.log(this.state.dare.status);
-    /* this.setState = ({
-      this.state.dare: dare;
-    });*/
-    this.props.onStatusChange();
-  }
+  handleStatusHasChanged = async ({ dare }) => {
+    console.log("lifting up B running");
+    console.log('dare',dare);
+    // this.setState({dare: dare});
+    this.props.onStatusChange({dare});
+  };
 
   render() {
     const { dare } = this.state;
@@ -31,7 +32,7 @@ export class DonorStati extends Component {
           (dare.status === "video-uploaded" && (
             <DonorStatusDareUploaded
               dare={dare}
-              onStatusHasChange={this.StatusHasChanged}
+              onStatusHasChanged={this.handleStatusHasChanged}
             />
           )) ||
           (dare.status === "confirmed" && (
