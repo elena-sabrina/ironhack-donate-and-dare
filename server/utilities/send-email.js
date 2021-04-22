@@ -1,10 +1,10 @@
 'use strict';
 
 const nodemailer = require('nodemailer');
+var os = require('os');
 
 const dotenv = require('dotenv');
 dotenv.config();
-
 
 const transport = nodemailer.createTransport({
   service: 'Gmail',
@@ -14,7 +14,14 @@ const transport = nodemailer.createTransport({
   }
 });
 
-const sendEmail = async ({ receiver, subject, body }) => {
+const sendEmail = async ({
+  receiver,
+  subject,
+  body,
+  domain,
+  path,
+  linkdescription
+}) => {
   console.log('send-email utility running');
   const result = await transport.sendMail({
     from: process.env.GMAIL_ADDRESS,
@@ -31,6 +38,10 @@ const sendEmail = async ({ receiver, subject, body }) => {
           </head>
           <body>
             ${body}
+         
+            <a href=${domain}+${path}> ${linkdescription} <a/>
+  
+        
           </body>
         </html>
       `

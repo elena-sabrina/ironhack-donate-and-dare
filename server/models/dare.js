@@ -40,7 +40,7 @@ const dareschema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['dare-sent', 'video-uploaded', 'confirmed']
+    enum: ['dare-sent', 'video-uploaded', 'confirmed', 'rejected', 'canceled']
   },
   video: {
     type: String

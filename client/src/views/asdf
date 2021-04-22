@@ -1,0 +1,67 @@
+render() {
+    return (
+      <div className='Body Profile'>
+        {(this.state.donor && (
+          <>
+            <h1>Hello {this.state.donor.name}</h1>
+            <section>
+              <h2>My Details</h2>
+
+              <p>Email: {this.state.donor.email}</p>
+              <p>Password: *** </p>
+
+              <button>
+                <Link to={`/profile/${this.state.donor._id}/edit`}>
+                  Edit Details
+                </Link>
+              </button>
+            </section>
+
+            <h2>Dares </h2>
+            <section>
+              <h3>Sent </h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.daresent}
+                  donor={this.state.donor}
+                />
+                <DareList
+                  dares={this.state.darerejected}
+                  donor={this.state.donor}
+                />
+              </div>
+            </section>
+            <section>
+              <h3>To be confirmed</h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.darevideouploaded}
+                  donor={this.state.donor}
+                />
+              </div>
+            </section>
+
+            <section>
+              <h3>Donated</h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.darerejected}
+                  donor={this.state.donor}
+                />
+              </div>
+            </section>
+            <section>
+              <h3>Canceled</h3>
+              <div className='profile-darelist'>
+                <DareList
+                  dares={this.state.darecanceled}
+                  donor={this.state.donor}
+                />
+              </div>
+            </section>
+          </>
+        )) || <p>Error no donor found</p>}
+      </div>
+    );
+  }
+}

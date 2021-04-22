@@ -30,8 +30,7 @@ router.get('/all', async (req, res, next) => {
 router.get('/create/:id', routeGuard, async (req, res, next) => {
   try {
     const template = await Template.findById(req.params.id);
-    console.log('dare/create/:id passes');
-    console.log(template);
+
     res.json({ template });
   } catch (error) {
     next(error);
@@ -43,17 +42,12 @@ router.get('/create/:id', routeGuard, async (req, res, next) => {
 router.post('/create/:id', routeGuard, async (req, res, next) => {
   try {
     const template = await Template.findById(req.params.id);
-    console.log('dare/create/:id passes the template:');
-    console.log(template);
 
-    const donor = req.donor._id;
-    console.log('req.donor._id passes the donor:');
-    console.log(donor);
-    const { daredname, daredemail, price, token } = req.body;
-    console.log('req.body passes:');
-    console.log(req.body);
+    const donorId = req.donor._id;
+    const donorName = req.donor.name;
+    const donorEmail = req.donor.email;
 
-    console.log('token', token);
+    const { daredname, daredemail, price, token, charity } = req.body;
 
     const payment = await processPayment({
       token,
@@ -70,28 +64,45 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
         image: template.image,
         price: template.price
       },
-      donor: donor,
+      donor: donorId,
       dared: {
         name: daredname,
         email: daredemail
       },
       price,
       payment_id: payment.id,
+      charity,
       status: 'dare-sent',
       video: null
     });
 
-    console.log('dare', dare);
-    /*await sendEmail({
-      receiver: 'hello@elena-sabrina.com',
+    console.log('sendemail going to run');
+    await sendEmail({
+      receiver: `${daredemail}`,
       subject: `You've been dared for a good cause`,
       body: `
-      <p>... has dared you to ...</p>
-      `
-    });*/
-
+      <h1> Hi ${daredname}, ${donorName} has dared you for a good cause.  </h1>
+      <p> Fullfill your dare and ${donorName} pays ${price} Euros to ${charity}. </p>
+      `,
+      domain: `http://localhost:3001/`,
+      path: `{dare/${dare._id}/dared}`,
+      linkdescription: `Fullfill your Dare`
+    });
+    await sendEmail({
+      receiver: `${donorEmail}`,
+      subject: `You've been dared for a good cause`,
+      body: `
+      <h1> Hi ${donorName}, you have dared ${daredname} for a good cause.  </h1>
+      <p> If ${daredname} fulfills the dare your donation of ${price} Euros will be sent to ${charity}. 
+Otherwise it will be transfered back to you. </p>
+      `,
+      domain: `http://localhost:3001/`,
+      path: `{dare/${dare._id}/donor}`,
+      linkdescription: `View status of your Dare`
+    });
     res.json({ dare, payment });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 });
@@ -120,8 +131,8 @@ router.get('/:id/donor', routeGuard, async (req, res, next) => {
       .populate('template')
       .populate('donor');
 
-    console.log('dare/:id/donor passes');
-    console.log(dare);
+    console.log('dare/:id/donor route running');
+
     res.json({ dare });
   } catch (error) {
     next(error);
@@ -132,25 +143,47 @@ router.get('/:id/donor', routeGuard, async (req, res, next) => {
 
 router.patch('/:id/donor', routeGuard, async (req, res, next) => {
   try {
-    console.log('dare');
-
     const dareId = req.params.id;
-    console.log(dareId);
+    const { confirmation } = req.body;
+    console.log('confirmation');
+    console.log(confirmation);
 
-    const dare = await Dare.findByIdAndUpdate(
-      dareId,
-      {
-        $set: {
-          status: 'dare-confirmed'
-        }
-      },
-      { new: true }
-    );
-
-    console.log('dare');
-    console.log(dare);
-
-    res.json({ dare });
+    if (confirmation === 'confirming') {
+      const dare = await Dare.findByIdAndUpdate(
+        dareId,
+        {
+          $set: {
+            status: 'confirmed'
+          }
+        },
+        { new: true }
+      );
+      /* await sendEmail({
+      receiver: `${donorEmail}`,
+      subject: `Thank you for your donation`,
+      body: `
+      <h1> Hi ${donorName}, thank you for confirming ${daredname}'s dare.  </h1>
+      <p> Your donation of ${price} Euros  will be sent to  ${charity}. </p>
+      `,
+      domain: `http://localhost:3001/`,
+      path: `{dare/${dare._id}/donor}`,
+      linkdescription: `View status of your Dare`
+    });*/
+      console.log(('dare:', dare));
+      res.json({ dare });
+    } else {
+      const dare = await Dare.findByIdAndUpdate(
+        dareId,
+        {
+          $set: {
+            status: 'rejected'
+          }
+        },
+        { new: true }
+      );
+      console.log('dare');
+      res.json({ dare });
+    }
   } catch (error) {
     next(error);
   }
@@ -180,8 +213,6 @@ router.patch('/:id/dared', routeGuard, async (req, res, next) => {
     console.log('req.body');
     console.log(req.body);
 
-    /*
-
     const dare = await Dare.findByIdAndUpdate(
       dareId,
       {
@@ -191,7 +222,7 @@ router.patch('/:id/dared', routeGuard, async (req, res, next) => {
       },
       { new: true }
     );
-*/
+
     console.log('dare');
     console.log(dare);
 

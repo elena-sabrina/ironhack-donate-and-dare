@@ -22,6 +22,7 @@ const Navbar = ({ donor, onSignOut }) => {
               <Link to='/'>Home</Link>
               <Link to='/dare/all'> Dares</Link>
               <Link to='/sign-in'>SignIn</Link>
+   
             </>
           )}
         </div>

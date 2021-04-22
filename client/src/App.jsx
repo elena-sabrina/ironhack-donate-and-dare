@@ -54,51 +54,59 @@ class App extends Component {
             redirect='/sign-in'
             exact
           />
-
           <Route path='/dare/all' component={Dares} exact />
           <Route path='/' component={Home} exact />
-
-          <Route
+          
+          <ProtectedRoute
             path='/dare/create/:id'
             render={(props) => (
               <CreateDare {...props} donor={this.state.donor} />
             )}
             exact
           />
-
           <Route
             path='/dare/create/:id/confirmation'
             component={CreateDareConfirmation}
             exact
           />
-          <Route path='/dare/:id/donor' component={ActiveDonor} exact />
-          <Route path='/dare/:id/dared' component={ActiveDared} exact />
-
+          <ProtectedRoute
+            path='/dare/:id/donor'
+            component={ActiveDonor}
+            authorized={donor}
+            redirect='/'
+            exact
+          />
+          <Route
+            path='/dare/:id/dared'
+            component={ActiveDared}
+            authorized={!donor}
+            redirect='/'
+            exact
+          />{" "}
+          />
           <ProtectedRoute
             path='/profile/:id/edit'
             component={EditProfile}
             authorized={donor}
-            redirect='/profile/:id'
+            redirect='/'
             exact
           />
-
           <ProtectedRoute
             path='/sign-in'
             render={(props) => (
               <SignIn {...props} onDonorChange={this.handleDonorChange} />
             )}
             authorized={!donor}
-            redirect='/profile/:id'
+            redirect='/'
             exact
           />
-
           <ProtectedRoute
             path='/sign-up'
             render={(props) => (
               <SignUp {...props} onDonorChange={this.handleDonorChange} />
             )}
             authorized={!donor}
-            redirect='/profile/:id'
+            redirect='/'
             exact
           />
         </Switch>

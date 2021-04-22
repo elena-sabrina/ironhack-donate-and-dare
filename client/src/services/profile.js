@@ -15,11 +15,24 @@ const api = axios.create({
 
 export const loadDonorAndDares = async (id) => {
   const response = await api.get(`/profile/${id}`);
-  const daresent = response.data.daresent;
-  const darevideouploaded = response.data.darevideouploaded;
-  const dareconfirmed = response.data.dareconfirmed;
-  const donor = response.data.donor;
-  return { daresent, darevideouploaded, dareconfirmed, donor };
+
+  const {
+    daresent,
+    darevideouploaded,
+    dareconfirmed,
+    darerejected,
+    darecanceled,
+    donor
+  } = response.data;
+
+  return {
+    daresent,
+    darevideouploaded,
+    dareconfirmed,
+    darerejected,
+    darecanceled,
+    donor
+  };
 };
 
 export const editProfile = async (id, data) => {

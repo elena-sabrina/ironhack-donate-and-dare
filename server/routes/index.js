@@ -37,11 +37,30 @@ router.get('/profile/:id', routeGuard, async (req, res, next) => {
       .populate('donor')
       .populate('template');
 
+    const darerejected = await Dare.find({
+      $and: [{ donor: { _id: req.session.donorId } }, { status: 'rejected' }]
+    })
+      .populate('donor')
+      .populate('template');
+
+    const darecanceled = await Dare.find({
+      $and: [{ donor: { _id: req.session.donorId } }, { status: 'canceled' }]
+    })
+      .populate('donor')
+      .populate('template');
+
     const donor = await Donor.findOne({ _id: req.session.donorId });
     console.log('donor');
     console.log(donor);
 
-    res.json({ donor, daresent, darevideouploaded, dareconfirmed });
+    res.json({
+      donor,
+      daresent,
+      darevideouploaded,
+      dareconfirmed,
+      darerejected,
+      darecanceled
+    });
   } catch (error) {
     next(error);
   }

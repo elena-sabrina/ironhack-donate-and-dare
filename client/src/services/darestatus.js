@@ -12,10 +12,9 @@ export const loadDareforDared = async (id) => {
   return response.data.dare;
 };
 
-export const confirmDare = async (id, data) => {
+export const confirmorRejectDare = async (id, data) => {
   console.log("confirmDare running");
   const response = await api.patch(`/dare/${id}/donor`, data);
-  console.log("confirmDare response.data", response.data);
   return response.data;
 };
 

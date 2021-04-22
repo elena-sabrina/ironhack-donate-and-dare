@@ -38,7 +38,6 @@ export class CreateDare extends Component {
         this.props.match.params.id,
         data
       );
-      console.log("payment", payment);
       this.props.history.push(`/dare/create/${dare._id}/confirmation`);
     } else {
       alert(
@@ -75,6 +74,7 @@ export class CreateDare extends Component {
         {(this.state.template && (
           <>
             <h1>Create {this.state.template.name}</h1>
+            
             <div className='side-by-side'>
               <PaymentForm
                 publicKey={StripePublicApiKey}

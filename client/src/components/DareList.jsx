@@ -8,7 +8,7 @@ const DareList = ({ dares, donor }) => {
     <div className='DareList'>
       {dares.map((dare) => (
         <Link key={dare._id} to={`/dare/${dare._id}/donor`}>
-          <DareItem dare={dare} donor={donor}/>
+          <DareItem dare={dare} donor={donor} />
         </Link>
       ))}
     </div>

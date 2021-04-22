@@ -7,9 +7,11 @@ import "./Profile.scss";
 
 export class Profile extends Component {
   state = {
-    daresent: [],
-    darevideouploaded: [],
-    dareconfirmed: [],
+    daresent: null,
+    darevideouploaded: null,
+    dareconfirmed: null,
+    darerejected: null,
+    darecanceled: null,
     donor: null
   };
 
@@ -19,11 +21,19 @@ export class Profile extends Component {
       daresent,
       darevideouploaded,
       dareconfirmed,
+      darerejected,
+      darecanceled,
       donor
     } = await loadDonorAndDares(this.props.match.params.id);
-    console.log("comp mount found donor & dares");
-    console.log(dareconfirmed);
-    this.setState({ daresent, darevideouploaded, dareconfirmed, donor });
+
+    this.setState({
+      daresent,
+      darevideouploaded,
+      dareconfirmed,
+      darerejected,
+      darecanceled,
+      donor
+    });
   }
   /* async componentDidMount() {
     console.log("moooouuuuuunting");
@@ -36,57 +46,70 @@ export class Profile extends Component {
   }*/
 
   render() {
+    const {
+      daresent,
+      darevideouploaded,
+      dareconfirmed,
+      darerejected,
+      darecanceled,
+      donor
+    } = this.state;
     return (
       <div className='Body Profile'>
-        {(this.state.donor && (
+        {(donor && (
           <>
-            <h1>Hello {this.state.donor.name}</h1>
+            <h1>Hello {donor.name}</h1>
             <section>
               <h2>My Details</h2>
 
-              <p>Email: {this.state.donor.email}</p>
+              <p>Email: {donor.email}</p>
               <p>Password: *** </p>
 
               <button>
-                <Link to={`/profile/${this.state.donor._id}/edit`}>
-                  Edit Details
-                </Link>
+                <Link to={`/profile/${donor._id}/edit`}>Edit Details</Link>
               </button>
             </section>
 
-
             <h2>Dares </h2>
-            <section>
-              <h3>Sent </h3>
-              <div className='profile-darelist'>
-                <DareList
-                  dares={this.state.daresent}
-                  donor={this.state.donor}
-                />
-              </div>
-            </section>
-            <section>
-              <h3>To be confirmed</h3>
-              <div className='profile-darelist'>
-                <DareList
-                  dares={this.state.darevideouploaded}
-                  donor={this.state.donor}
-                />
-              </div>
-            </section>
 
-            <section>
-              <h3>Donated</h3>
-              <div className='profile-darelist'>
-                <DareList
-                  dares={this.state.dareconfirmed}
-                  donor={this.state.donor}
-                />
-              </div>
-            </section>
+            {(daresent.length > 0 || darerejected.length > 0) && (
+              <section>
+                <h3>Sent</h3>
+                <div className='profile-darelist'>
+                  <DareList dares={daresent} donor={donor} />
+                  <DareList dares={darerejected} donor={donor} />
+                </div>
+              </section>
+            )}
 
+            {darevideouploaded.length > 0 && (
+              <section>
+                <h3>To be confirmed</h3>
+                <div className='profile-darelist'>
+                  <DareList dares={darevideouploaded} donor={donor} />
+                </div>
+              </section>
+            )}
 
-            
+            {dareconfirmed.length > 0 && (
+              <section>
+                <h3>Donated</h3>
+
+                <div className='profile-darelist'>
+                  <DareList dares={dareconfirmed} donor={donor} />
+                </div>
+              </section>
+            )}
+
+            {darecanceled.length > 0 && (
+              <section>
+                <h3>Rejected</h3>
+
+                <div className='profile-darelist'>
+                  <DareList dares={darecanceled} donor={donor} />
+                </div>
+              </section>
+            )}
           </>
         )) || <p>Error no donor found</p>}
       </div>

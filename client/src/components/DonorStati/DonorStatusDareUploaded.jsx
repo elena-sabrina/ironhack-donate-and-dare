@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { confirmDare } from "./../../services/darestatus.js";
+import { confirmorRejectDare } from "./../../services/darestatus.js";
 
 import DareItem from "./../DareItem";
 
@@ -13,19 +13,19 @@ export class DonorStatusDareUploaded extends Component {
   }
   handleDareConfirmation = async (event) => {
     event.preventDefault();
-    const { template, donor, dared, price, payment_id, status } = this.state;
-    const dare = await confirmDare(this.state.dare._id, {
-      template,
-      donor,
-      dared,
-      price,
-      payment_id,
-      status
+    const { dare } = await confirmorRejectDare(this.state.dare._id, {
+      confirmation: "confirming"
     });
+    console.log(dare._id);
+    this.props.history.push(`/dare/${dare._id}/donor`);
+  };
 
-    console.log("newdareinfo", dare);
-
-    this.props.history.push(`/dare/${this.state.dare._id}/donor`);
+  handleDareRejection = async (event) => {
+    event.preventDefault();
+    const { dare } = await confirmorRejectDare(this.state.dare._id, {
+      confirmation: "rejected"
+    });
+    this.props.history.push(`/dare/${dare._id}/donor`);
   };
 
   render() {
@@ -42,6 +42,8 @@ export class DonorStatusDareUploaded extends Component {
         <p>Watch the video and confirm the dare</p>
         <button>Watch video</button>
         <button onClick={this.handleDareConfirmation}>Confirm Dare</button>
+        <button onClick={this.handleDareRejection}>Reject Dare</button>
+
         <h5>Dare Status</h5>
         <p>
           {this.state.dare.dared.name} has uploaded dare video. Awaiting your
