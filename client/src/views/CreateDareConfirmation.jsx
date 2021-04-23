@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { loadDareforDonorConfirmation } from "./../services/createdare.js";
 
+import "./CreateDareConfirmation.scss";
+
 export class CreateDareConfirmation extends Component {
   state = {
     dare: null
@@ -15,16 +17,20 @@ export class CreateDareConfirmation extends Component {
   render() {
     const dare = this.state.dare;
     return (
-      <div className='Body'>
+      <div className='DareConfirmation Body'>
         {(dare && (
           <>
             <h1>
               Thank you for your donation of {dare.price} To {dare.charity}
             </h1>
+            <div>
             <p>{dare.dared.name} has been informed via Email.</p>
             <button>
               <Link to={`/dare/${dare._id}/donor`}>Ok</Link>
             </button>
+
+            </div>
+            
           </>
         )) || <p>Error no dare found</p>}
       </div>

@@ -2,9 +2,13 @@
 
 .TemplateItem {
   background-color: white;
+  height: 20em;
+  width: 12em;
+
   img {
-    height: auto;
+    height: 10em;
     width: 100%;
+    object-fit: cover;
   }
   div {
     padding: 1em;

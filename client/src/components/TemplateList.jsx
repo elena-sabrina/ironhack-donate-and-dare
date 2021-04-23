@@ -7,7 +7,7 @@ const TemplateList = ({ templates }) => {
   return (
     <div className='TemplateList'>
       {templates.map((template) => (
-        <Link key={template._id} to={`/dare/create/${template._id}`}>
+        <Link className='TemplateItemt' key={template._id} to={`/dare/create/${template._id}`}>
           <TemplateItem template={template} />
         </Link>
       ))}

@@ -43,7 +43,10 @@ export class DaredStati extends Component {
             <DaredStatusDareConfirmed dare={dare} />
           )) ||
           (dare.status === "rejected" && (
-            <DaredStatusDareRejected dare={dare} />
+            <DaredStatusDareRejected
+              dare={dare}
+              onVideoPassed={this.handleVideoUploaded}
+            />
           )) ||
           (dare.status === "canceled" && (
             <DaredStatusDareCanceled dare={dare} />

@@ -2,9 +2,13 @@
 
 .DareItem {
   background-color: white;
+  height: 34em;
+  width: 20em;
+
   img {
-    height: auto;
+    height: 12em;
     width: 100%;
+    object-fit: cover;
   }
   div {
     padding: 1em;

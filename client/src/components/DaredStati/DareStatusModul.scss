@@ -1,0 +1,22 @@
+@import "./../../styles/variables";
+
+.DareStatusModul {
+  .side-by-side {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .Dare {
+      margin: 0 100px;
+      flex: 1;
+      color: red;
+    }
+
+    form {
+      margin: 0 0 100px 0;
+      flex: 1;
+      text-align: left;
+      vertical-align: top;
+    }
+  }
+}

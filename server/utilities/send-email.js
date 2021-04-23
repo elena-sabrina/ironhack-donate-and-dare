@@ -38,10 +38,7 @@ const sendEmail = async ({
           </head>
           <body>
             ${body}
-         
-            <a href=${domain}+${path}> ${linkdescription} <a/>
-  
-        
+            <a href="${domain}${path}"> ${linkdescription} <a/>
           </body>
         </html>
       `

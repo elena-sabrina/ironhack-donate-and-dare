@@ -1,11 +1,11 @@
 import "./DareItem.scss";
 
-import glass from "./../styles/images/glass.jpg";
+//import glass from "./../styles/images/glass.jpg";
 
 const DareItem = ({ donor, dare }) => {
   return (
     <div className='DareItem'>
-      <img src={glass} alt='glass' />
+      <img src={dare.template.image} alt='glass' />
       <div>
         <h5>
           {dare.template.name} - {dare.status}

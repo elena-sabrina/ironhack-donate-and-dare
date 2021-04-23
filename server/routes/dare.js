@@ -85,7 +85,7 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
       <p> Fullfill your dare and ${donorName} pays ${price} Euros to ${charity}. </p>
       `,
       domain: `http://localhost:3001/`,
-      path: `{dare/${dare._id}/dared}`,
+      path: `dare/${dare._id}/dared`,
       linkdescription: `Fullfill your Dare`
     });
     await sendEmail({

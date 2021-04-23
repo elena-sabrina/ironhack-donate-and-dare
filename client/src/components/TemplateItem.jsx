@@ -1,11 +1,11 @@
 import "./TemplateItem.scss";
 
-import glass from "./../styles/images/glass.jpg";
+//import glass from "./../styles/images/glass.jpg";
 
 const TemplateItem = ({ template }) => {
   return (
     <div className='TemplateItem'>
-      <img src={glass} alt='glass' />
+      <img src={template.image} alt='glass' />
       <div>
         <h5>{template.name}</h5>
         <p>{template.description}</p>
