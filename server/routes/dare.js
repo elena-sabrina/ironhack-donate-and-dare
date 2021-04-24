@@ -157,7 +157,7 @@ router.patch('/:id/donor', routeGuard, async (req, res, next) => {
           }
         },
         { new: true }
-      );
+      ).populate('donor');
       /* await sendEmail({
       receiver: `${donorEmail}`,
       subject: `Thank you for your donation`,
@@ -219,7 +219,30 @@ router.patch('/:id/dared', routeGuard, async (req, res, next) => {
         }
       },
       { new: true }
-    );
+    ).populate('donor');
+    await sendEmail({
+      receiver: `${dare.dared.email}`,
+      subject: `Thank you for uploading your dare video`,
+      body: `
+      <h1> Hi ${dare.dared.name}, thank you for uploading your dare video. </h1>
+      </p> ${dare.donor.name} has received your dare. Please wait for their confirmation.</p>
+      <p> Once the dare is confirmed the donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
+      `,
+      domain: `http://localhost:3001/`,
+      path: `dare/${dare._id}/dared`,
+      linkdescription: `Check Dare Status`
+    });
+    await sendEmail({
+      receiver: `${dare.donor.email}`,
+      subject: `You've been dared for a good cause`,
+      body: `
+      <h1> Hi ${dare.donor.name}, ${dare.dared.name} has uploaded his dare.   </h1>
+      <p> Please confirm the dare. Once the dare is confirmed the donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
+      `,
+      domain: `http://localhost:3001/`,
+      path: `{dare/${dare._id}/donor}`,
+      linkdescription: `Confirm Dare`
+    });
 
     res.json({ dare });
   } catch (error) {
