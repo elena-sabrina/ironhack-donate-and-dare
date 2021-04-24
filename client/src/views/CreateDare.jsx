@@ -34,10 +34,7 @@ export class CreateDare extends Component {
         charity,
         token
       };
-      const { dare, payment } = await createDare(
-        this.props.match.params.id,
-        data
-      );
+      const { dare } = await createDare(this.props.match.params.id, data);
       this.props.history.push(`/dare/create/${dare._id}/confirmation`);
     } else {
       alert(
@@ -74,7 +71,7 @@ export class CreateDare extends Component {
         {(this.state.template && (
           <>
             <h1>Create {this.state.template.name}</h1>
-            
+
             <div className='side-by-side'>
               <PaymentForm
                 publicKey={StripePublicApiKey}

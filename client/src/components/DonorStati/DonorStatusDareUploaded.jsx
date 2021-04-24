@@ -22,7 +22,7 @@ export class DonorStatusDareUploaded extends Component {
     const { dare } = await confirmorRejectDare(this.state.dare._id, {
       confirmation: "confirming"
     });
-    // this.setState({ dare: dare });
+
     this.props.onStatusHasChanged({ dare });
   };
 
@@ -32,6 +32,8 @@ export class DonorStatusDareUploaded extends Component {
     const { dare } = await confirmorRejectDare(this.state.dare._id, {
       confirmation: "rejected"
     });
+    this.setState({ dare: dare });
+
     //const location = event.view.location.href;
     //console.log(location);
     //reload(location);
