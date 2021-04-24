@@ -2,6 +2,7 @@
 
 .DareConfirmation {
   width: 100vh;
+  height: 100vh;
   h1 {
     line-height: 1.2;
     padding: 100px 100px 50px 100px;
@@ -9,10 +10,8 @@
 
   div {
     text-align: center;
-    button{
-
-    margin: 50px 0 0 0;
-
+    button {
+      margin: 50px 0 0 0;
     }
   }
 }
