@@ -12,7 +12,7 @@ export class DaredStatusDareRejected extends Component {
     console.log("props C", this.props);
     console.log("props C dare", this.props.dare);
     this.state = {
-      dare: props.dare,
+      /* dare: props.dare, */
       video: null
     };
   }
@@ -22,7 +22,7 @@ export class DaredStatusDareRejected extends Component {
     const { video } = this.state;
     console.log(video);
 
-    const { dare } = await videoUploaded(this.state.dare._id, {
+    const { dare } = await videoUploaded(this.props.dare._id, {
       video
     });
     console.log(dare.video);
@@ -41,17 +41,18 @@ export class DaredStatusDareRejected extends Component {
     return (
       <div className='Body DareStatusModul'>
         <h1>
-          Hey {this.state.dare.dared.name},<br /> {this.state.dare.donor.name}{" "}
+          Hey {this.props.dare.dared.name},<br /> {this.props.dare.donor.name}{" "}
           has rejected your dare.
         </h1>
         <div className='side-by-side'>
           <div className='Left'>
             <h5>
-              Robin has sent your dare back. <br />Try again.{" "}
+              Robin has sent your dare back. <br />
+              Try again.{" "}
             </h5>
             <p>
               If you complete the dare, Robin will donate{" "}
-              {this.state.dare.price} Euros to {this.state.dare.charity}.
+              {this.props.dare.price} Euros to {this.props.dare.charity}.
             </p>
             <p>Have you completed your dare?</p>
             <form>
@@ -71,13 +72,13 @@ export class DaredStatusDareRejected extends Component {
 
             <h5>Dare Status</h5>
             <p>
-              After your video has been uploaded, {this.state.dare.donor.name}{" "}
+              After your video has been uploaded, {this.props.dare.donor.name}{" "}
               will have to confirm your dare.{" "}
             </p>
           </div>
 
           <div className='Dare'>
-            <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+            <DareItem dare={this.props.dare} donor={this.props.dare.donor} />
           </div>
         </div>
       </div>

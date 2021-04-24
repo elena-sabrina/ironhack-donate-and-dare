@@ -12,14 +12,12 @@ export class DonorStatusDareUploaded extends Component {
 
     console.log("props C", this.props);
     console.log("props C dare", this.props.dare);
-    this.state = {
-      dare: props.dare
-    };
   }
+
   handleDareConfirmation = async (event) => {
     console.log("lifting up C running");
     event.preventDefault();
-    const { dare } = await confirmorRejectDare(this.state.dare._id, {
+    const { dare } = await confirmorRejectDare(this.props.dare._id, {
       confirmation: "confirming"
     });
 
@@ -29,33 +27,29 @@ export class DonorStatusDareUploaded extends Component {
   handleDareRejection = async (event) => {
     event.preventDefault();
 
-    const { dare } = await confirmorRejectDare(this.state.dare._id, {
+    const { dare } = await confirmorRejectDare(this.props.dare._id, {
       confirmation: "rejected"
     });
-    this.setState({ dare: dare });
 
-    //const location = event.view.location.href;
-    //console.log(location);
-    //reload(location);
+    this.props.onStatusHasChanged({ dare });
   };
 
   render() {
     return (
       <div className='Body DareStatusModul'>
         <h1>
-          Hey {this.state.dare.donor.name},<br />
-          {this.state.dare.dared.name}
-           has fulfilled your dare
+          Hey {this.props.dare.donor.name},<br />
+          {this.props.dare.dared.name}
+          has fulfilled your dare
         </h1>
         <div className='side-by-side'>
           <div className='Left'>
             <h5>
-              {this.state.dare.dared.name} has sent you the following dare
-      
+              {this.props.dare.dared.name} has sent you the following dare
             </h5>
             <p>Watch the video and confirm the dare</p>
             <button>
-              <Link to={this.state.dare.video} className='Logo'>
+              <Link to={this.props.dare.video} className='Logo'>
                 Watch video
               </Link>
             </button>
@@ -65,12 +59,12 @@ export class DonorStatusDareUploaded extends Component {
             <br />
             <h5>Dare Status</h5>
             <p>
-              {this.state.dare.dared.name} has uploaded dare video. Awaiting
+              {this.props.dare.dared.name} has uploaded dare video. Awaiting
               your confirmation.
             </p>
           </div>
           <div className='Dare'>
-            <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+            <DareItem dare={this.props.dare} donor={this.props.dare.donor} />
           </div>
         </div>
       </div>

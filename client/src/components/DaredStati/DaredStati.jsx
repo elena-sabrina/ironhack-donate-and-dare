@@ -11,9 +11,11 @@ export class DaredStati extends Component {
     super(props);
     console.log("props B", this.props);
     console.log("props B dare", this.props.dare);
+    /*
     this.state = {
       dare: props.dare
     };
+    */
   }
 
   handleVideoUploaded = async ({ dare }) => {
@@ -23,7 +25,7 @@ export class DaredStati extends Component {
   };
 
   render() {
-    const { dare } = this.state;
+    const { dare } = this.props;
     console.log(dare);
     return (
       <div>

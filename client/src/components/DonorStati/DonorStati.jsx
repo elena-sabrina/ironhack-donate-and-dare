@@ -12,18 +12,12 @@ export class DonorStati extends Component {
     console.log("props B", this.props);
     console.log("props B dare", this.props.dare);
     this.state = {
-      dare: props.dare
+      /* dare: props.dare */
     };
   }
 
-  handleStatusHasChanged = async ({ dare }) => {
-    console.log("lifting up B running");
-    console.log('dare',dare);
-    this.props.onStatusChange({dare});
-  };
-
   render() {
-    const { dare } = this.state;
+    const { dare } = this.props;
     console.log(dare);
     return (
       <div>
@@ -31,7 +25,7 @@ export class DonorStati extends Component {
           (dare.status === "video-uploaded" && (
             <DonorStatusDareUploaded
               dare={dare}
-              onStatusHasChanged={this.handleStatusHasChanged}
+              onStatusHasChanged={this.props.onStatusChange}
             />
           )) ||
           (dare.status === "confirmed" && (
