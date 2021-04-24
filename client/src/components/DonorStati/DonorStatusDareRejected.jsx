@@ -5,7 +5,7 @@ const DonorStatusDareRejected = ({ dare }) => {
   return (
     <div className='Body DareStatusModul'>
       <h1>
-        You have rejected {dare.dared.name}'s dare. Wait until he uploads a new
+        You have rejected {dare.dared.name}'s dare. <br/>Wait until he uploads a new
         dare video.{" "}
       </h1>
       <div className='side-by-side'>

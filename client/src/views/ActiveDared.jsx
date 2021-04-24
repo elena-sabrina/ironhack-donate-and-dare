@@ -13,7 +13,7 @@ export class ActiveDared extends Component {
     };
   }
 
-  async loadDare () {
+  async loadDare() {
     const dare = await loadDareforDared(this.props.match.params.id);
     this.setState({ dare });
   }
@@ -26,7 +26,6 @@ export class ActiveDared extends Component {
     console.log("lifting up B running");
     console.log("dare", dare);
     this.setState({ dare: dare });
-    // this.props.history.push(`/dare/${this.state.dare._id}/dared`);
     this.loadDare();
   };
 

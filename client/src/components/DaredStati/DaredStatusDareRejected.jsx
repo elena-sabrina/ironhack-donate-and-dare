@@ -46,7 +46,9 @@ export class DaredStatusDareRejected extends Component {
         </h1>
         <div className='side-by-side'>
           <div className='Left'>
-            <h5>Robin has sent your dare back. Try again. </h5>
+            <h5>
+              Robin has sent your dare back. <br />Try again.{" "}
+            </h5>
             <p>
               If you complete the dare, Robin will donate{" "}
               {this.state.dare.price} Euros to {this.state.dare.charity}.

@@ -21,16 +21,15 @@ export class CreateDareConfirmation extends Component {
         {(dare && (
           <>
             <h1>
-              Thank you for your donation of {dare.price} To {dare.charity}
+              Thank you for your donation of {dare.price} Euros to{" "}
+              {dare.charity}
             </h1>
             <div>
-            <p>{dare.dared.name} has been informed via Email.</p>
-            <button>
-              <Link to={`/dare/${dare._id}/donor`}>Ok</Link>
-            </button>
-
+              <p>{dare.dared.name} has been informed via Email.</p>
+              <button>
+                <Link to={`/dare/${dare._id}/donor`}>Ok</Link>
+              </button>
             </div>
-            
           </>
         )) || <p>Error no dare found</p>}
       </div>

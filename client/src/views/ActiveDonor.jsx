@@ -13,16 +13,20 @@ export class ActiveDonor extends Component {
     };
   }
 
-  async componentDidMount() {
+  async loadDare() {
     const dare = await loadDareforDonor(this.props.match.params.id);
     this.setState({ dare });
+  }
+
+  componentDidMount() {
+    this.loadDare();
   }
 
   handleStatusChangeSubmission = async ({ dare }) => {
     console.log("lifting up B running");
     console.log("dare", dare);
     this.setState({ dare: dare });
-    this.props.history.push(`/profile/${this.state.dare.donor._id}`);
+    this.loadDare();
   };
 
   render() {
