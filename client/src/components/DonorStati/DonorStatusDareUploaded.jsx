@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { confirmorRejectDare } from "./../../services/darestatus.js";
 
 import DareItem from "./../DareItem";
+import "./../DaredStati/DareStatusModul.scss";
 
 export class DonorStatusDareUploaded extends Component {
   constructor(props) {
@@ -38,30 +39,36 @@ export class DonorStatusDareUploaded extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Body DareStatusModul'>
         <h1>
           Hey {this.state.dare.donor.name},{this.state.dare.dared.name}
           has fulfilled your dare
         </h1>
-        <h5>
-          ,{this.state.dare.dared.name} has sent you the following dare
-          confirmation:
-        </h5>
-        <p>Watch the video and confirm the dare</p>
-        <button>
-          <Link to={this.state.dare.video} className='Logo'>
-            Watch video
-          </Link>
-        </button>
-        <button onClick={this.handleDareConfirmation}>Confirm Dare</button>
-        <button onClick={this.handleDareRejection}>Reject Dare</button>
+        <div className='side-by-side'>
+          <div className='Left'>
+            <h5>
+              ,{this.state.dare.dared.name} has sent you the following dare
+              confirmation:
+            </h5>
+            <p>Watch the video and confirm the dare</p>
+            <button>
+              <Link to={this.state.dare.video} className='Logo'>
+                Watch video
+              </Link>
+            </button>
+            <button onClick={this.handleDareConfirmation}>Confirm Dare</button>
+            <button onClick={this.handleDareRejection}>Reject Dare</button>
 
-        <h5>Dare Status</h5>
-        <p>
-          {this.state.dare.dared.name} has uploaded dare video. Awaiting your
-          confirmation.
-        </p>
-        <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+            <h5>Dare Status</h5>
+            <p>
+              {this.state.dare.dared.name} has uploaded dare video. Awaiting
+              your confirmation.
+            </p>
+          </div>
+          <div className='Dare'>
+            <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+          </div>
+        </div>
       </div>
     );
   }

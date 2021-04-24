@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { videoUploaded } from "./../../services/darestatus.js";
 
 import DareItem from "../DareItem";
-//import "./DareStatusModul.scss";
+import "./DareStatusModul.scss";
 
 export class DaredStatusDareSent extends Component {
   constructor(props) {
@@ -41,29 +41,44 @@ export class DaredStatusDareSent extends Component {
     return (
       <div className='Body DareStatusModul'>
         <h1>
-          Hey {this.state.dare.dared.name},you've been dared by{" "}
-          {this.state.dare.donor.name}
+          Hey {this.state.dare.dared.name},<br /> you've been dared.
         </h1>
-        <div className='side-by-side'>
-          <form>
-            <input
-              id='input-url'
-              name='video'
-              type='url'
-              value={this.state.video}
-              placebolder='http://'
-              onChange={this.handleUrlInputChange}
-              onblur='checkURL(this)'
-              required
-            />
 
-            <button onClick={this.handleUploadVideoSubmission}>Upload</button>
-          </form>
-          <h5>Dare Status</h5>
-          <p>Upload a video of you doing the dare to enable ... </p>
-        </div>
-        <div className='Dare'>
-          <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+        <div className='side-by-side'>
+          <div className='Left'>
+            <h5>Robin has sent you a dare. </h5>
+            <p>
+              If you complete the dare, Robin will donate{" "}
+              {this.state.dare.price} Euros to {this.state.dare.charity}.
+            </p>
+            <p>Have you completed your dare?</p>
+
+            <form>
+              <input
+                id='input-url'
+                name='video'
+                type='text'
+                value={this.state.video}
+                placeholder='http://'
+                onChange={this.handleUrlInputChange}
+                onblur='checkURL(this)'
+                required
+              />
+
+              <button onClick={this.handleUploadVideoSubmission}>
+                Yes, Upload Dare
+              </button>
+            </form>
+            <h5>Dare Status</h5>
+            <p>
+              After your video has been uploaded, {this.state.dare.donor.name}{" "}
+              will have to confirm your dare.{" "}
+            </p>
+          </div>
+
+          <div className='Dare'>
+            <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+          </div>
         </div>
       </div>
     );

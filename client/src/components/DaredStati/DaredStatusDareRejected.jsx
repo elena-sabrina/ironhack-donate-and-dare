@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { videoUploaded } from "./../../services/darestatus.js";
 
 import DareItem from "../DareItem";
+import "./DareStatusModul.scss";
 
 export class DaredStatusDareRejected extends Component {
   constructor(props) {
@@ -38,28 +39,36 @@ export class DaredStatusDareRejected extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Body DareStatusModul'>
         <h1>
           Hey {this.state.dare.dared.name},{this.state.dare.donor.name} has
           rejected your dare. Try again.
         </h1>
-        <form>
-          <input
-            id='input-url'
-            name='video'
-            type='url'
-            value={this.state.video}
-            placebolder='http://'
-            onChange={this.handleUrlInputChange}
-            onblur='checkURL(this)'
-            required
-          />
+        <div className='side-by-side'>
+          <div className='Left'>
+            <form>
+              <input
+                id='input-url'
+                name='video'
+                type='url'
+                value={this.state.video}
+                placebolder='http://'
+                onChange={this.handleUrlInputChange}
+                onblur='checkURL(this)'
+                required
+              />
 
-          <button onClick={this.handleUploadVideoSubmission}>Upload</button>
-        </form>
-        <h5>Dare Status</h5>
-        <p>Upload a video of you doing the dare to enable ... </p>
-        <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+              <button onClick={this.handleUploadVideoSubmission}>Upload</button>
+            </form>
+
+            <h5>Dare Status</h5>
+            <p>Upload a video of you doing the dare to enable ... </p>
+          </div>
+
+          <div className='Dare'>
+            <DareItem dare={this.state.dare} donor={this.state.dare.donor} />
+          </div>
+        </div>
       </div>
     );
   }
