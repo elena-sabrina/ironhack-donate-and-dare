@@ -41,18 +41,24 @@ export class DaredStatusDareRejected extends Component {
     return (
       <div className='Body DareStatusModul'>
         <h1>
-          Hey {this.state.dare.dared.name},{this.state.dare.donor.name} has
-          rejected your dare. Try again.
+          Hey {this.state.dare.dared.name},<br /> {this.state.dare.donor.name}{" "}
+          has rejected your dare.
         </h1>
         <div className='side-by-side'>
           <div className='Left'>
+            <h5>Robin has sent your dare back. Try again. </h5>
+            <p>
+              If you complete the dare, Robin will donate{" "}
+              {this.state.dare.price} Euros to {this.state.dare.charity}.
+            </p>
+            <p>Have you completed your dare?</p>
             <form>
               <input
                 id='input-url'
                 name='video'
                 type='url'
                 value={this.state.video}
-                placebolder='http://'
+                placeholder='http://'
                 onChange={this.handleUrlInputChange}
                 onblur='checkURL(this)'
                 required
@@ -62,7 +68,10 @@ export class DaredStatusDareRejected extends Component {
             </form>
 
             <h5>Dare Status</h5>
-            <p>Upload a video of you doing the dare to enable ... </p>
+            <p>
+              After your video has been uploaded, {this.state.dare.donor.name}{" "}
+              will have to confirm your dare.{" "}
+            </p>
           </div>
 
           <div className='Dare'>

@@ -1,8 +1,16 @@
 @import "./../styles/variables";
 
 .Profile {
+  h1 {
+    padding: 100px 100px 50px 100px;
+  }
+  .Details {
+    margin: 2em;
+  }
+  .Dares {
+    margin: 2em;
+  }
+
   section {
-    margin: 2em 0;
-    padding: 2em 0;
   }
 }

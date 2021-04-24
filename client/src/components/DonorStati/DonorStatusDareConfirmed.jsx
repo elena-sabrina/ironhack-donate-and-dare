@@ -1,19 +1,20 @@
-import DareItem from "./../DareItem";
+import { Link } from "react-router-dom";
 import "./../DaredStati/DareStatusModul.scss";
 
 const DonorStatusDareConfirmed = ({ dare }) => {
   return (
     <div className='Body DareStatusModul'>
-      <h1>
-        Hey {dare.donor.name},{dare.dared.name} has fulfilled your dare
-      </h1>
-      <div className='side-by-side'>
-        <div className='Left'>
-          <p>copy</p>
-        </div>
-        <div className='Dare'>
-          <DareItem dare={dare} donor={dare.donor} />
-        </div>
+      <div className='Center'>
+        <h1>
+          Thank you <br />
+          for your confirmation
+        </h1>
+        <p>
+          Your donation of {dare.price} Euros will be sent to {dare.charity}
+        </p>
+        <button>
+          <Link to='/'>Back to Home</Link>
+        </button>
       </div>
     </div>
   );

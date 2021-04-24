@@ -1,18 +1,22 @@
 @import "./../styles/variables";
 
 .DareList {
+  display: block;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: auto;
+  width: 100%;
+
   a {
-    margin: 2em 1em;
-    height: 20em;
-    width: 12em;
+    margin: 1em 2em 1em 0;
+    height: 31em;
+    width: 20em;
   }
 
-  a:hover {
+  /*a:hover {
     height: 20.5em;
     width: 12.5em;
     margin: 1.5em 0.5em;
-  }
+  }*/
 }

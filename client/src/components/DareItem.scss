@@ -1,9 +1,8 @@
 @import "./../styles/variables";
 
 .DareItem {
-  background-color: white;
-  height: 34em;
   width: 20em;
+  margin: 0 0 10em 0;
 
   img {
     height: 12em;
@@ -12,6 +11,7 @@
   }
   div {
     padding: 1em;
+    background-color: white;
 
     h5 {
       font-family: $special-font;
@@ -22,10 +22,15 @@
     p {
       font-size: 0.8em;
       color: $grey;
+      margin: 0 0 2px 0;
     }
-    .Price {
-      font-size: 1em;
+
+    h6 {
+      font-family: $special-font;
+      font-size: 0.8em;
       color: $black;
+      margin: 12px 0 4px 0;
+      letter-spacing: 0.1em;
     }
   }
 }

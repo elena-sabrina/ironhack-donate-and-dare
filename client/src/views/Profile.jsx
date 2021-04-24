@@ -59,7 +59,7 @@ export class Profile extends Component {
         {(donor && (
           <>
             <h1>Hello {donor.name}</h1>
-            <section>
+            <div className='Details'>
               <h2>My Details</h2>
 
               <p>Email: {donor.email}</p>
@@ -68,48 +68,49 @@ export class Profile extends Component {
               <button>
                 <Link to={`/profile/${donor._id}/edit`}>Edit Details</Link>
               </button>
-            </section>
+            </div>
+            <div className='Dares'>
+              <h2>Dares </h2>
 
-            <h2>Dares </h2>
+              {(daresent.length > 0 || darerejected.length > 0) && (
+                <section>
+                  <h3>Sent</h3>
+                  <div className='profile-darelist'>
+                    <DareList dares={daresent} donor={donor} />
+                    <DareList dares={darerejected} donor={donor} />
+                  </div>
+                </section>
+              )}
 
-            {(daresent.length > 0 || darerejected.length > 0) && (
-              <section>
-                <h3>Sent</h3>
-                <div className='profile-darelist'>
-                  <DareList dares={daresent} donor={donor} />
-                  <DareList dares={darerejected} donor={donor} />
-                </div>
-              </section>
-            )}
+              {darevideouploaded.length > 0 && (
+                <section>
+                  <h3>To be confirmed</h3>
+                  <div className='profile-darelist'>
+                    <DareList dares={darevideouploaded} donor={donor} />
+                  </div>
+                </section>
+              )}
 
-            {darevideouploaded.length > 0 && (
-              <section>
-                <h3>To be confirmed</h3>
-                <div className='profile-darelist'>
-                  <DareList dares={darevideouploaded} donor={donor} />
-                </div>
-              </section>
-            )}
+              {dareconfirmed.length > 0 && (
+                <section>
+                  <h3>Donated</h3>
 
-            {dareconfirmed.length > 0 && (
-              <section>
-                <h3>Donated</h3>
+                  <div className='profile-darelist'>
+                    <DareList dares={dareconfirmed} donor={donor} />
+                  </div>
+                </section>
+              )}
 
-                <div className='profile-darelist'>
-                  <DareList dares={dareconfirmed} donor={donor} />
-                </div>
-              </section>
-            )}
+              {darecanceled.length > 0 && (
+                <section>
+                  <h3>Rejected</h3>
 
-            {darecanceled.length > 0 && (
-              <section>
-                <h3>Rejected</h3>
-
-                <div className='profile-darelist'>
-                  <DareList dares={darecanceled} donor={donor} />
-                </div>
-              </section>
-            )}
+                  <div className='profile-darelist'>
+                    <DareList dares={darecanceled} donor={donor} />
+                  </div>
+                </section>
+              )}
+            </div>
           </>
         )) || <p>Error no donor found</p>}
       </div>

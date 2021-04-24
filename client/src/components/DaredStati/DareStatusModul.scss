@@ -1,6 +1,19 @@
 @import "./../../styles/variables";
 
 .DareStatusModul {
+  .Center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    h1 {
+      padding: 100px 100px 20px 100px;
+    }
+    p {
+      padding: 16px 16px 50px 16px;
+    }
+  }
+
   h1 {
     line-height: 1.5;
   }
@@ -33,6 +46,9 @@
       margin: 0 100px;
       flex: 1;
       color: red;
+    }
+    button {
+      margin: 15px 0 50px 15px;
     }
   }
 }

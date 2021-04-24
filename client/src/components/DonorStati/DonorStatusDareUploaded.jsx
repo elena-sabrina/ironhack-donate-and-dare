@@ -41,13 +41,14 @@ export class DonorStatusDareUploaded extends Component {
     return (
       <div className='Body DareStatusModul'>
         <h1>
-          Hey {this.state.dare.donor.name},{this.state.dare.dared.name}
+          Hey {this.state.dare.donor.name},<br />
+          {this.state.dare.dared.name}
           has fulfilled your dare
         </h1>
         <div className='side-by-side'>
           <div className='Left'>
             <h5>
-              ,{this.state.dare.dared.name} has sent you the following dare
+              {this.state.dare.dared.name} has sent you the following dare
               confirmation:
             </h5>
             <p>Watch the video and confirm the dare</p>
@@ -59,6 +60,7 @@ export class DonorStatusDareUploaded extends Component {
             <button onClick={this.handleDareConfirmation}>Confirm Dare</button>
             <button onClick={this.handleDareRejection}>Reject Dare</button>
 
+            <br />
             <h5>Dare Status</h5>
             <p>
               {this.state.dare.dared.name} has uploaded dare video. Awaiting

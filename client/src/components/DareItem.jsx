@@ -7,12 +7,13 @@ const DareItem = ({ donor, dare }) => {
     <div className='DareItem'>
       <img src={dare.template.image} alt='glass' />
       <div>
-        <h5>
-          {dare.template.name} - {dare.status}
-        </h5>
+        <h5>{dare.template.name}</h5>
         <p>{dare.template.description}</p>
-        <p className='Price'>{dare.price} Euros</p>
-        <p>To {dare.charity}</p>
+        <br />
+        <h6>Donation</h6>
+        <p>
+          {dare.price} Euros to {dare.charity}
+        </p>
         <h6>Donor</h6>
         <p>{donor.name}</p>
         <p>{donor.email}</p>
