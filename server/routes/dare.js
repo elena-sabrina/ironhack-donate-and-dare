@@ -84,8 +84,8 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
       <h1> Hi ${daredname}, ${donorName} has dared you for a good cause.  </h1>
       <p> Fullfill your dare and ${donorName} pays ${price} Euros to ${charity}. </p>
       `,
-      domain: `http://localhost:3001/`,
-      path: `dare/${dare._id}/dared`,
+      domain: process.env.APP_DOMAIN,
+      path: `/dare/${dare._id}/dared`,
       linkdescription: `Fullfill your Dare`
     });
     await sendEmail({
@@ -96,8 +96,8 @@ router.post('/create/:id', routeGuard, async (req, res, next) => {
       <p> If ${daredname} fulfills the dare your donation of ${price} Euros will be sent to ${charity}. 
 Otherwise it will be transfered back to you. </p>
       `,
-      domain: `http://localhost:3001/`,
-      path: `{dare/${dare._id}/donor}`,
+      domain: process.env.APP_DOMAIN,
+      path: `/dare/${dare._id}/donor`,
       linkdescription: `View status of your Dare`
     });
     res.json({ dare, payment });
@@ -228,8 +228,8 @@ router.patch('/:id/dared', routeGuard, async (req, res, next) => {
       </p> ${dare.donor.name} has received your dare. Please wait for their confirmation.</p>
       <p> Once the dare is confirmed the donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
       `,
-      domain: `http://localhost:3001/`,
-      path: `dare/${dare._id}/dared`,
+      domain: process.env.APP_DOMAIN,
+      path: `/dare/${dare._id}/dared`,
       linkdescription: `Check Dare Status`
     });
     await sendEmail({
@@ -239,8 +239,8 @@ router.patch('/:id/dared', routeGuard, async (req, res, next) => {
       <h1> Hi ${dare.donor.name}, ${dare.dared.name} has uploaded his dare.   </h1>
       <p> Please confirm the dare. Once the dare is confirmed the donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
       `,
-      domain: `http://localhost:3001/`,
-      path: `{dare/${dare._id}/donor}`,
+      domain: process.env.APP_DOMAIN,
+      path: `/dare/${dare._id}/donor`,
       linkdescription: `Confirm Dare`
     });
 

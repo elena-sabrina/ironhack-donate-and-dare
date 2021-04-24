@@ -13,15 +13,21 @@ export class ActiveDared extends Component {
     };
   }
 
-  async componentDidMount() {
+  async loadDare () {
     const dare = await loadDareforDared(this.props.match.params.id);
     this.setState({ dare });
   }
+
+  componentDidMount() {
+    this.loadDare();
+  }
+
   handleVideoUploadSubmision = async ({ dare }) => {
     console.log("lifting up B running");
     console.log("dare", dare);
     this.setState({ dare: dare });
-    this.props.history.push(`/dare/${this.state.dare._id}/dared`);
+    // this.props.history.push(`/dare/${this.state.dare._id}/dared`);
+    this.loadDare();
   };
 
   render() {

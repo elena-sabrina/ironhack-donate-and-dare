@@ -6,6 +6,8 @@ import {
   CardElement
 } from "@stripe/react-stripe-js";
 
+import "./PaymentForm.scss";
+
 import { loadStripe } from "@stripe/stripe-js";
 
 const cardStyles = {
@@ -68,8 +70,8 @@ class PaymentForm extends Component {
               >
                 {this.props.children}
 
-                <label>Credit Card Details</label>
-                <div>
+                <p>Credit Card Details</p>
+                <div className='credit-card-input'>
                   <CardElement options={{ style: cardStyles }} />
                 </div>
                 <button>Donate Now</button>

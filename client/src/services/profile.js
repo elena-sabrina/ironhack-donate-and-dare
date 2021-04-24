@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-  withCredentials: true
-});
+import api from "./api";
 
 /*export const loadDonorAndDares = async (id) => {
   const response = await api.get(`/profile/${id}`);
