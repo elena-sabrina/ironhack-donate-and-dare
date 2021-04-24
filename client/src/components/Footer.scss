@@ -1,0 +1,30 @@
+@import "./../styles/variables";
+
+.Footer {
+  background-color: $lightorange;
+  height: 4em;
+
+  margin: 100px 0 0 0;
+  padding: 0;
+  .Nav {
+    max-width: 75em;
+    margin: 0 auto;
+    padding: 0.25em 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .Menu {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .Logo {
+    font-size: 1em;
+  }
+  a {
+    padding: 1em 1.5em 1em 1.5em;
+  }
+}

@@ -18,6 +18,8 @@ import SignUp from "./views/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import "./App.scss";
 
 class App extends Component {
   state = {
@@ -43,7 +45,7 @@ class App extends Component {
   render() {
     const donor = this.state.donor;
     return (
-      <BrowserRouter>
+      <BrowserRouter className='App'>
         <Navbar donor={donor} onSignOut={this.handleSignOut} />
 
         <Switch>
@@ -102,6 +104,7 @@ class App extends Component {
             exact
           />
         </Switch>
+        <Footer donor={donor} onSignOut={this.handleSignOut} />
       </BrowserRouter>
     );
   }

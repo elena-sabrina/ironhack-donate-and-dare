@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { listTemplates } from "./../services/createdare";
 import TemplateList from "../components/TemplateList";
+import "./Dares.scss";
 
 class Dares extends Component {
   state = {
@@ -11,15 +12,17 @@ class Dares extends Component {
   async componentDidMount() {
     console.log("mounting dares");
     const templates = await listTemplates();
-    console.log('comp mount fond templates');
+    console.log("comp mount fond templates");
     console.log(templates);
     this.setState({ templates });
   }
   render() {
     return (
-      <div className="Body">
+      <div className='Body'>
         <h1>Dares</h1>
-        <TemplateList templates={this.state.templates} />
+        <section>
+          <TemplateList templates={this.state.templates} />
+        </section>
       </div>
     );
   }

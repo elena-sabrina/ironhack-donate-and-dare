@@ -1,0 +1,38 @@
+@import "./../styles/variables";
+
+.Home {
+  .side-by-side {
+    display: flex;
+    width: 100%;
+    background-color: $lightorange;
+
+    .Right {
+      margin: 0;
+      flex: 1;
+    }
+
+    .Left {
+      flex: 1;
+      padding: 100px 50px 100px 100px;
+
+      align-items: center;
+      justify-content: center;
+
+      h1 {
+        text-align: left;
+        padding: 0;
+      }
+    }
+  }
+
+  .HowTo {
+    width: 100%;
+    padding: 100px 50px 100px 100px;
+
+    td {
+      max-width: 600px;
+
+      padding: 10px 200px 40px 0;
+    }
+  }
+}
