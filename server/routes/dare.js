@@ -158,17 +158,28 @@ router.patch('/:id/donor', routeGuard, async (req, res, next) => {
         },
         { new: true }
       ).populate('donor');
-      /* await sendEmail({
-      receiver: `${donorEmail}`,
-      subject: `Thank you for your donation`,
-      body: `
-      <h1> Hi ${donorName}, thank you for confirming ${daredname}'s dare.  </h1>
-      <p> Your donation of ${price} Euros  will be sent to  ${charity}. </p>
-      `,
-      domain: `http://localhost:3001/`,
-      path: `{dare/${dare._id}/donor}`,
-      linkdescription: `View status of your Dare`
-    });*/
+      await sendEmail({
+        receiver: `${dare.dared.email}`,
+        subject: `${dare.donor.name} has confirmed your dare`,
+        body: `
+        <h1> Hi ${dare.dared.name}, ${dare.donor.name} has confirmed your dare </h1>
+        <p> Thanks to you the donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
+        `,
+        domain: process.env.APP_DOMAIN,
+        path: `/dare/${dare._id}/dared`,
+        linkdescription: `Check Dare Status`
+      });
+      await sendEmail({
+        receiver: `${dare.donor.email}`,
+        subject: `Thank you for confirming the dare`,
+        body: `
+        <h1> Hi ${dare.donor.name},thank you for confirming the dare. </h1>
+        <p> Your donation of ${dare.price} Euros will be sent to ${dare.charity}. </p>
+        `,
+        domain: process.env.APP_DOMAIN,
+        path: `/dare/${dare._id}/donor`,
+        linkdescription: `Confirm Dare`
+      });
       console.log(('dare:', dare));
       res.json({ dare });
     } else {
@@ -180,7 +191,29 @@ router.patch('/:id/donor', routeGuard, async (req, res, next) => {
           }
         },
         { new: true }
-      );
+      ).populate('donor');
+      await sendEmail({
+        receiver: `${dare.dared.email}`,
+        subject: `${dare.donor.name} has rejected your dare`,
+        body: `
+        <h1> Hi ${dare.dared.name}, ${dare.donor.name} has rejected your dare </h1>
+        <p> Please try again so we can send the donation of ${dare.price} Euros to ${dare.charity}. </p>
+        `,
+        domain: process.env.APP_DOMAIN,
+        path: `/dare/${dare._id}/dared`,
+        linkdescription: `Check Dare Status`
+      });
+      await sendEmail({
+        receiver: `${dare.donor.email}`,
+        subject: `You have rejected ${dare.dared.name}'s dare.`,
+        body: `
+        <h1> Hi ${dare.donor.name}, you have rejected ${dare.dared.name}'s dare. </h1>
+        <p> We sent him a request to retry so we can send the donation of ${dare.price} Euros to ${dare.charity}. </p>
+        `,
+        domain: process.env.APP_DOMAIN,
+        path: `/dare/${dare._id}/donor`,
+        linkdescription: `Confirm Dare`
+      });
       console.log('dare');
       res.json({ dare });
     }
